@@ -1,0 +1,51 @@
+import styled from "styled-components";
+
+export const FeatureSec = styled.div`
+  display: grid;
+  justify-content: center;
+`;
+
+export const FeatureContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-around;
+  gap: 20px;
+  width: 100%;
+  max-width: 1024px;
+`;
+
+export const FeatureItems = styled.div`
+  position: relative;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 250px;
+  flex: 1;
+`;
+
+export const FeatureImg = styled.img`
+  width: 100%;
+  height: 100%;
+  max-width: 526px;
+  object-fit: cover;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+  &:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+  }
+`;
+
+export const FeatureTitleWrapp = styled.div`
+  position: absolute;
+  transform: translate(20px, -80px);
+`;
+
+export const FeatureTitle = styled.h1`
+  font-size: 24px;
+  text-transform: capitalize;
+`;
+
+export const FeatureSubTitle = styled.h2`
+  font-size: 20px;
+`;
