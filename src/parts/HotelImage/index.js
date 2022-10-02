@@ -7,25 +7,7 @@ import {
   ImgWrapp,
 } from "./ImgStyle";
 
-const HotelImage = () => {
-  const Image = [
-    {
-      src: require("../../assets/images/hotel-detail.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail2.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail3.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail4.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail5.jpg"),
-    },
-  ];
-
+const HotelImage = ({ Image }) => {
   return (
     <HotelImgWrapp>
       <HotelImgContainer>

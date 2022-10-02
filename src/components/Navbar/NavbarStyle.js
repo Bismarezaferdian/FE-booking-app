@@ -1,7 +1,9 @@
 // import second from "styles-component";
 
-import { FaDotCircle } from "react-icons/fa";
 import styled from "styled-components";
+import { FaDotCircle } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
+import { Link as LinkR } from "react-router-dom";
 
 export const Dot = styled(FaDotCircle)`
   align-items: center;
@@ -9,10 +11,17 @@ export const Dot = styled(FaDotCircle)`
   color: #fee440;
 `;
 
+export const Icon = styled(MdLogout)`
+  font-size: 22px;
+`;
+
 export const Nav = styled.div`
   display: flex;
   justify-content: center;
   background-color: #003580;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   height: 50px;
 `;
 
@@ -23,13 +32,27 @@ export const NavbarContainer = styled.div`
   color: #ffff;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    padding: 28px 20px 0 20px;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 28px 20px;
+  }
 `;
 
-export const Logo = styled.span`
+export const Logo = styled(LinkR)`
   font-weight: 600;
   display: flex;
   align-items: center;
   font-size: 24px;
+  text-decoration: none;
+  color: #ffff;
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 export const NavItems = styled.div`
@@ -37,10 +60,12 @@ export const NavItems = styled.div`
   gap: 30px;
 `;
 
-export const NavButton = styled.button`
+export const NavButton = styled(LinkR)`
   /* padding: 5px 10px; */
   border: none;
   background-color: transparent;
+  color: #ffff;
+  text-decoration: none;
   color: #ffff;
   cursor: pointer;
   &:hover {
@@ -56,4 +81,10 @@ export const NavButtonRegister = styled.button`
   cursor: pointer;
   &:hover {
   }
+`;
+
+export const LogOut = styled.button``;
+
+export const UserName = styled.p`
+  text-transform: capitalize;
 `;

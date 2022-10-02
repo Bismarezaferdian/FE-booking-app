@@ -1,16 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from "./App";
+import "swiper/css/bundle";
+// import "./styles.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import reportWebVitals from "./reportWebVitals";
+import { SearchContextProvider } from "./context/SearchContext";
+import { AuthContextProvider } from "./context/AuthContex";
+import { BookingContextProvider } from "./context/BookingContex";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
+    <AuthContextProvider>
+      <SearchContextProvider>
+        <BookingContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </BookingContextProvider>
+      </SearchContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

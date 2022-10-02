@@ -35,13 +35,6 @@ function Footer() {
             <FooterLi>Villa</FooterLi>
             <FooterLi>Home Stays</FooterLi>
           </FooterUl>
-          <FooterUl>
-            <FooterLi>City</FooterLi>
-            <FooterLi>Popular</FooterLi>
-            <FooterLi>Hotels</FooterLi>
-            <FooterLi>Villa</FooterLi>
-            <FooterLi>Home Stays</FooterLi>
-          </FooterUl>
         </FooterList>
       </FooterContainer>
       <FooterTitle>

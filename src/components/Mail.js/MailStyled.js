@@ -12,9 +12,27 @@ export const MailSec = styled.div`
   padding: 50px;
 `;
 
-export const MailTitle = styled.h1``;
+export const MailTitle = styled.h1`
+  font-size: 28px;
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 18px;
+    font-weight: 600;
+  }
+`;
 
-export const MailDesc = styled.p``;
+export const MailDesc = styled.p`
+  font-size: 22px;
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
+  }
+`;
 export const MailFormWrapp = styled.div``;
 
 export const MailForm = styled.input.attrs({
@@ -42,5 +60,10 @@ export const MailBtn = styled.button`
 
   &:hover {
     color: red;
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 480px) {
+    margin-top: 12px;
   }
 `;

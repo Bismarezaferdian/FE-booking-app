@@ -16,6 +16,8 @@ export const ListSec = styled.div`
 export const ListContainer = styled.div`
   display: flex;
   justify-content: center;
+  padding: 20px;
+  background-color: #edf6f9;
 `;
 
 export const ListItem = styled.div`
@@ -29,6 +31,7 @@ export const ListWrapp = styled.div`
   display: flex;
   width: 100%;
   max-width: 1024px;
+  gap: 20px;
 `;
 export const ListSearch = styled.div`
   position: sticky;
@@ -41,7 +44,12 @@ export const ListSearch = styled.div`
   flex-direction: column;
   min-height: 60vh;
   border-radius: 8px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+  @media screen and (max-width: 480px) {
+  }
 
   /* margin-left: 12px; */
 `;
@@ -108,4 +116,28 @@ export const ListOptionInput = styled.input.attrs({
   border: none;
   width: 50px;
   padding: 6px;
+`;
+
+export const BtnWrapp = styled.div`
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+`;
+
+export const BtnListSeacrh = styled.button`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: #003580;
+  color: #ffff;
+  border-radius: 4px;
+
+  &:hover {
+    background: #1363df;
+    transition: 0.2s all ease;
+  }
 `;

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import { format } from "date-fns";
 import {
+  BtnListSeacrh,
+  BtnWrapp,
   ListContainer,
   ListDate,
   ListDateWrapp,
@@ -26,15 +28,39 @@ import { DateRange } from "react-date-range";
 import HotelList from "../../components/HotelList.js/index";
 import Footer from "../../components/Footer";
 import Mail from "../../components/Mail.js";
+import useFetch from "../../hooks/useFetch";
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
 
 const List = () => {
+  const [input, setInput] = useState("");
+  const [text, setText] = useState("");
+
+  const datas = useContext(SearchContext);
+  // console.log(datas.date);
+
   const [openDate, setOpenDate] = useState("false");
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
+  const [destination, setDestination] = useState(datas.destination);
+  // const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
+  // const [option, setOption] = useState(location.state.option);
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
 
-  const [option, setOption] = useState(location.state.option);
+  const { data, loading, reFetch } = useFetch(
+    `http://localhost:8000/api/v1/hotel?feature=true&city=${destination}`
+  );
+  // &min=${
+  //   min || 0
+  // }&max=${max || 9999}
+  const handleClick = () => {
+    reFetch();
+  };
 
+  const { option } = useContext(SearchContext);
+
+  // console.log(destination);
   return (
     <ListSec>
       <Navbar />
@@ -46,7 +72,10 @@ const List = () => {
             <ListTitle>Booking Now !</ListTitle>
             <ListItem>
               <ListLabel>Destination</ListLabel>
-              <ListInput placeholder={destination} />
+              <ListInput
+                placeholder={destination}
+                onChange={(e) => setDestination(e.target.value)}
+              />
               <Location />
             </ListItem>
             <ListItem>
@@ -77,11 +106,11 @@ const List = () => {
               <ListTitle>Option</ListTitle>
               <ListOption>
                 <ListLabelOption>Min Price per night</ListLabelOption>
-                <ListOptionInput />
+                <ListOptionInput onChange={(e) => setMin(e.target.value)} />
               </ListOption>
               <ListOption>
                 <ListLabelOption>Max Price per night</ListLabelOption>
-                <ListOptionInput />
+                <ListOptionInput onChange={(e) => setMax(e.target.value)} />
               </ListOption>
               <ListOption>
                 <ListLabelOption>adult</ListLabelOption>
@@ -95,17 +124,22 @@ const List = () => {
                 <ListLabelOption>children</ListLabelOption>
                 <ListOptionInput min={0} placeholder={option.children} />
               </ListOption>
+              <BtnWrapp>
+                <BtnListSeacrh onClick={handleClick}>Search</BtnListSeacrh>
+              </BtnWrapp>
             </ListItem>
           </ListSearch>
           {/* flex3 column */}
           <ListResult>
-            <HotelList />
-            <HotelList />
-            <HotelList />
-            <HotelList />
-            <HotelList />
-            <HotelList />
-            <HotelList />
+            {loading ? (
+              "please wait page is loading......."
+            ) : (
+              <>
+                {data.map((item) => (
+                  <HotelList item={item} key={item._id} />
+                ))}
+              </>
+            )}
           </ListResult>
         </ListWrapp>
       </ListContainer>
@@ -116,3 +150,17 @@ const List = () => {
 };
 
 export default List;
+
+// @media screen and (max-width: 768px) {
+//   display: none;
+//   /* position: relative;
+//   flex-direction: column;
+//   height: 64vh;
+//   top: -160px;
+//   z-index: 999;
+//   border-top-left-radius: 40px 40px;
+//   border-top-right-radius: 40px 40px; */
+// }
+// @media screen and (max-width: 480px) {
+//   /* flex-direction: column; */
+// }

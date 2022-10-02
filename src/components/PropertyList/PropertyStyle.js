@@ -1,21 +1,24 @@
 import styled from "styled-components";
 
 export const PropertySec = styled.div`
-  display: flex;
+  display: grid;
   justify-content: center;
 `;
 
 export const PropertyContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
+  /* display: grid; */
+  /* grid-template-columns: repeat(5, 1fr); */
+  justify-content: center;
   gap: 20px;
-  width: 100%;
+  padding: 0 12px 0 12px;
+  width: 100vw;
   max-width: 1024px;
+  overflow: hidden;
 `;
 
 export const PropertyImg = styled.img`
   width: 100%;
-  max-height: 150px;
+  height: 140px;
   object-fit: cover;
   /* -webkit-transition: 0.4s ease;
   transition: 0.4s ease; */
@@ -30,18 +33,35 @@ export const PropertyImg = styled.img`
 
 export const PropertyItems = styled.div`
   /* flex: 1; */
+  /* background: red; */
   border-radius: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
   cursor: pointer;
 `;
 
-export const PropertyTitleWrapp = styled.div``;
+export const PropertyTitleWrapp = styled.div`
+  text-transform: capitalize;
+`;
 
-export const PropertyTitle = styled.h1`
+export const PropertyTitle = styled.a`
   font-size: 18px;
+  text-transform: capitalize;
+  /* list-style: none; */
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+    font-weight: 600;
+  }
 `;
 
 export const PropertySubTitle = styled.h2`
   font-size: 14px;
   font-weight: 300;
+  text-transform: capitalize;
 `;

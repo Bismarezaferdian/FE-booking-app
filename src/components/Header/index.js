@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -31,10 +31,14 @@ import {
   OptionCounter,
   Minus,
   Plus,
+  Train,
 } from "./HeaderStyle";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { toast, ToastContainer } from "react-toastify";
 
 function Header({ type }) {
+  // const [destination, setDestinatio] = useState("destination");
   const [destination, setDestination] = useState("");
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState([
@@ -51,11 +55,27 @@ function Header({ type }) {
     children: 0,
     room: 1,
   });
+  var location = useLocation();
+
+  const getNavLink = (path) => {
+    return location.pathname === path ? "active" : undefined;
+  };
+
+  // console.log(getNavLi);
 
   const navigate = useNavigate();
+  const { dispatch } = useContext(SearchContext);
 
   const handleSubmit = () => {
-    navigate("/hotels", { state: { destination, date, option } });
+    if (destination === "") {
+      toast("Destination tidak boleh kosong");
+    } else {
+      dispatch({
+        type: "NEW_SEARCH",
+        payload: { destination, date, option },
+      });
+      navigate("/hotels", { state: { destination, date, option } });
+    }
   };
 
   const handleOption = (name, operation) => {
@@ -67,29 +87,47 @@ function Header({ type }) {
     });
   };
 
+  // const handleDestination = (e) => {
+  //   setDestination(e.target.value);
+  // };
+
+  // // useEffect(() => {
+  // //   handleDestination();
+  // // });
+
+  const lowerCase = (string) => {
+    // return string.charAt(0).toLowerCase() + string.slice(1);
+    return string.toLowerCase();
+  };
   return (
     <HeaderHead type={type}>
+      <ToastContainer autoClose={5000} />
       <HeaderContainer type={type}>
         <HeaderList>
-          <HeaderItem active>
+          <HeaderItem active={getNavLink("/")} to="/">
             <Bed />
             <Span>stays</Span>
           </HeaderItem>
-          <HeaderItem>
+
+          <HeaderItem active={getNavLink("/flight")} to="/flight">
             <Plane />
             <Span>Flights</Span>
           </HeaderItem>
-          <HeaderItem>
+          <HeaderItem active={getNavLink("/rental")} to="/rental">
             <Car />
             <Span>Car Rentals</Span>
           </HeaderItem>
-          <HeaderItem>
+          <HeaderItem active={getNavLink("/atracttion")} to="/atracttion">
             <Bed />
             <Span>Atracttions</Span>
           </HeaderItem>
-          <HeaderItem>
+          <HeaderItem active={getNavLink("/taxi")} to="/taxi">
             <Taxi />
-            <Span>Airport Taxis</Span>
+            <Span>Taxis</Span>
+          </HeaderItem>
+          <HeaderItem active={getNavLink("/train")} to="/train">
+            <Train />
+            <Span>Train</Span>
           </HeaderItem>
         </HeaderList>
         {type !== "list" && (
@@ -100,12 +138,15 @@ function Header({ type }) {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free Lamabooking account
             </HeaderDesc>
-            <HeaderBtn> Signin/Signup</HeaderBtn>
-            <HeaderSearch>
+            <HeaderBtn to={"/login"}> Signin/Signup</HeaderBtn>
+            <HeaderSearch id="search">
               <HeaderSearchItems>
                 <Bed />
                 <Input
-                  onChange={(e) => setDestination(e.target.value)}
+                  onChange={
+                    (e) => setDestination(lowerCase(e.target.value))
+                    // setDestination(capitalizeFirstLetter(e.target.value))
+                  }
                   required
                 />
               </HeaderSearchItems>
@@ -197,7 +238,10 @@ function Header({ type }) {
                 )}
               </HeaderSearchItems>
               <HeaderSearchItems>
-                <HeaderSearchBtn onClick={handleSubmit} type="submit">
+                <HeaderSearchBtn
+                  // disabled={destination === "" ? true : false}
+                  onClick={handleSubmit}
+                >
                   {" "}
                   Search
                 </HeaderSearchBtn>

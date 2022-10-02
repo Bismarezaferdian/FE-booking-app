@@ -1,5 +1,6 @@
-import React from "react";
-import Hotel from "../../assets/images/hotel-bandung2.jpg";
+import { useContext } from "react";
+import Feature1 from "../../assets/images/feature-villa1.jpg";
+import { AuthContext } from "../../context/AuthContex";
 import {
   DateHotel,
   HotelCard,
@@ -30,22 +31,46 @@ import {
   Wifi,
 } from "./HotelListStyle";
 
-const HotelList = () => {
+const HotelList = ({ item }) => {
+  const { user } = useContext(AuthContext);
+  const price = item.cheapestPrice;
+
+  const priceDiscount = (price * 10) / 100;
+  const priceCount = price - priceDiscount;
+
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
+  // console.log(`../../assets/images/${item.photo[0]}`);
   return (
     <HotelCard>
       <HotelImgWrapp>
-        <HotelImg src={Hotel} />
+        {/* <HotelImg src={Hotel} /> */}
+        <HotelImg src={item.photo} />
       </HotelImgWrapp>
       <HotelDescWrapp>
-        <HotelTitleWrapp>
-          <HotelDetailTitle>Hotel Davinci Dago Bandung</HotelDetailTitle>
-        </HotelTitleWrapp>
         <HotelDetailContainer>
+          <HotelTitleWrapp>
+            <HotelDetailTitle to={user ? `/hotels/${item._id}` : "/login"}>
+              {item.name}
+            </HotelDetailTitle>
+            {/* <HotelDetailTitle to={handleLink}>{item.name}</HotelDetailTitle> */}
+          </HotelTitleWrapp>
           <HotelDetailContent>
             <HotelDesc>
-              <HotelLocation>Bandung, jawa barat</HotelLocation>
-              <HotelRating>4.5</HotelRating>
+              <HotelLocation>{item.address}</HotelLocation>
+              {item.rating && (
+                <div style={{ margin: "2px " }}>
+                  <HotelRating>{item.rating}</HotelRating>
+                  <SpanRating>good</SpanRating>
+                </div>
+              )}
+              <HotelRating>5.4</HotelRating>
               <SpanRating>good</SpanRating>
+
               <HotelFeatureDesc>
                 <SpanDesc>
                   <Wifi />
@@ -74,9 +99,10 @@ const HotelList = () => {
           </HotelDetailContent>
           <HotelPriceWrapp>
             <HotelDiscCard>Disc 10% off</HotelDiscCard>
-            <HotelPriceDisc>idr 186.000</HotelPriceDisc>
+            <HotelPriceDisc>idr {rupiah(item.cheapestPrice)}</HotelPriceDisc>
             <HotelPrice>
-              <SpanIdr>idr</SpanIdr>540.000
+              <SpanIdr>idr</SpanIdr>
+              {rupiah(priceCount)}
             </HotelPrice>
             <HotelPerNight>1 night 1 room</HotelPerNight>
             <HotelDescCancel>free cancelation</HotelDescCancel>

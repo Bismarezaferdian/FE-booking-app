@@ -4,6 +4,7 @@ export const HomeCountainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: start;
   gap: 30px;
   margin-top: 50px;
   /* background-color: rgb(508, 508, 255); */
@@ -12,8 +13,9 @@ export const HomeCountainer = styled.div`
 `;
 
 export const HomeTitle = styled.h1`
-  font-size: 20px;
-  width: 100%;
+  font-size: 18px;
+  padding-left: 20px;
+  width: 100vw;
   max-width: 1024px;
-  /* gap: 30px; */
+  font-weight: 550;
 `;

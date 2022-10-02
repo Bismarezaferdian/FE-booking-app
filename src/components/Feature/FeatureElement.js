@@ -12,6 +12,15 @@ export const FeatureContainer = styled.div`
   gap: 20px;
   width: 100%;
   max-width: 1024px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+  }
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 40px;
+  }
 `;
 
 export const FeatureItems = styled.div`
@@ -19,8 +28,14 @@ export const FeatureItems = styled.div`
   color: white;
   border-radius: 10px;
   overflow: hidden;
-  height: 250px;
+  max-height: 250px;
   flex: 1;
+  @media screen and (max-width: 768px) {
+    column-gap: 5px;
+  }
+  @media screen and (max-width: 480px) {
+    column-gap: 5px;
+  }
 `;
 
 export const FeatureImg = styled.img`

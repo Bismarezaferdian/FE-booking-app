@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Bed } from "../../components/Header/HeaderStyle";
 import { Smoke, Tv, Wifi } from "../../components/HotelList.js/HotelListStyle";
+import { SearchContext } from "../../context/SearchContext";
+import useFetch from "../../hooks/useFetch";
+import HotelRoom from "../HotelRoom";
 import {
   Bath,
   Button,
   ContentDesc,
-  ContentDescTitle,
+  ContentTitle,
   DescContainer,
   DescSec,
   DescSubTitle,
@@ -26,47 +30,65 @@ import {
 } from "./HotelDescStyle";
 
 const HotelDesc = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const { data, loading } = useFetch(
+    `http://localhost:8000/api/v1/hotel/find/${id}`
+  );
+
+  // const text = data.desc;
+  // const textLenght = text.length;
+  // const [textDisplay, setTextDisplay] = useState("");
+
+  // const handleClick = () => {
+  //   setTextDisplay(data.desc.substring(0, textLenght));
+  // };
+
+  const price = data.cheapestPrice;
+
+  const priceDiscount = (price * 10) / 100;
+  const priceCount = price - priceDiscount;
+
+  const { destination, date, option } = useContext(SearchContext);
+
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
+
   return (
     <DescSec>
       <DescContainer>
         <TitleContentWrapp>
           <TitleWrapp>
-            <DescSubTitle>Hotel</DescSubTitle>
-            <DescTitle>Davinci Dago Bandung</DescTitle>
-            <DescSubTitle>bandung, jawa barat</DescSubTitle>
+            <DescSubTitle>{data.type}</DescSubTitle>
+            <DescTitle>{data.title}</DescTitle>
+            <DescSubTitle>
+              {data.address}, {data.city}, {data.distance} mil from bandara
+            </DescSubTitle>
           </TitleWrapp>
           <PriceWrapp>
-            <PriceDisc>Idr 860.000</PriceDisc>
+            <PriceDisc>Idr {rupiah(data.cheapestPrice)}</PriceDisc>
             <Price>
-              <Idr>idr</Idr>550.000
+              <Idr>idr</Idr>
+              {rupiah(priceCount)}
             </Price>
             <PerNight>1 night 1 room</PerNight>
-            <Button>Booking Now</Button>
+            <Button href="#reservasi">Booking Now</Button>
           </PriceWrapp>
         </TitleContentWrapp>
         <DescWrapp>
-          <ContentDescTitle>Description</ContentDescTitle>
+          <ContentTitle>Description</ContentTitle>
           <ContentDesc>
-            Moritz Smart Bandung welcomes you who are looking for fun in one of
-            the best places in the center of Bandung City. You will feel the
-            uniqueness combined with the luxurious atmosphere from the moment
-            you step into our hotel. Find more space to explore attractive
-            facilities with the concept of optical illusion combined with
-            monochrome colors throughout the hotel that will take you to
-            different atmosphere and flexibility of the best hotel services. The
-            happiest moments of life are created from first impressions &
-            excitement combined with the best hospitality services. Modern style
-            room with smart keyless access, comfortable bed, stylish bathroom
-            and free WiFi access. At Moritz, a luxurious atmosphere exists
-            throughout the hotel, including the Momo Restaurant. You will
-            satisfy your appetite and taste "Pome Fever" on food & drink. Also
-            enjoy the experience at Day-light Restaurant and Night-time Social
-            House. The nearest airport is Husein Sastranegara International
-            Airport, 6.9 km from the property.
+            {data.desc}
+            {/* <button onClick={handleClick}>....</button> */}
           </ContentDesc>
         </DescWrapp>
         <DescWrapp>
-          <ContentDescTitle>Fasilitas</ContentDescTitle>
+          <ContentTitle>Fasilitas</ContentTitle>
           <FasilitasContent>
             <IconWrapp>
               <Bed /> <IconDesc>Double Bed</IconDesc>
@@ -98,6 +120,7 @@ const HotelDesc = () => {
             </IconWrapp>
           </FasilitasContent>
         </DescWrapp>
+        <HotelRoom id={id} hotel={data} />
       </DescContainer>
     </DescSec>
   );
