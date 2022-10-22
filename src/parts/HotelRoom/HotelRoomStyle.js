@@ -32,11 +32,12 @@ export const RoomContentWrap = styled.div`
 export const CardRoom = styled.div`
   /* border: 1px solid gray; */
   background: #ffff;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   width: 100%;
   /* flex-direction: column; */
   margin: 4px 0;
+  padding: 8px;
   align-items: center;
   /* padding: 20px 0 20px 20px; */
   align-items: center;

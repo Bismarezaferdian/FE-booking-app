@@ -9,11 +9,17 @@ export const PropertyContainer = styled.div`
   /* display: grid; */
   /* grid-template-columns: repeat(5, 1fr); */
   justify-content: center;
+  /* display: flex; */
   gap: 20px;
   padding: 0 12px 0 12px;
   width: 100vw;
   max-width: 1024px;
   overflow: hidden;
+`;
+
+export const WrappSkeleton = styled.div`
+  display: flex;
+  gap: 20px;
 `;
 
 export const PropertyImg = styled.img`
@@ -36,6 +42,7 @@ export const PropertyItems = styled.div`
   /* background: red; */
   border-radius: 10px;
   /* overflow: hidden; */
+
   cursor: pointer;
 `;
 

@@ -29,28 +29,11 @@ import {
   TitleWrapp,
 } from "./HotelDescStyle";
 
-const HotelDesc = () => {
-  const location = useLocation();
-  const id = location.pathname.split("/")[2];
-
-  const { data, loading } = useFetch(
-    `http://localhost:8000/api/v1/hotel/find/${id}`
-  );
-
-  // const text = data.desc;
-  // const textLenght = text.length;
-  // const [textDisplay, setTextDisplay] = useState("");
-
-  // const handleClick = () => {
-  //   setTextDisplay(data.desc.substring(0, textLenght));
-  // };
-
+const HotelDesc = ({ data, id }) => {
   const price = data.cheapestPrice;
 
   const priceDiscount = (price * 10) / 100;
   const priceCount = price - priceDiscount;
-
-  const { destination, date, option } = useContext(SearchContext);
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {

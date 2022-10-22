@@ -20,6 +20,12 @@ export const PayWrapp = styled.div`
   flex-direction: row;
   width: 100%;
   max-width: 1024px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export const ContentPayWrapp = styled.div`
@@ -29,6 +35,14 @@ export const ContentPayWrapp = styled.div`
   align-items: center;
   &:nth-child(1) {
     border-right: 1px solid gray;
+  }
+  @media screen and (max-width: 768px) {
+    &:nth-child(1) {
+      border: none;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    border: none;
   }
 `;
 export const SubTitle = styled.p`

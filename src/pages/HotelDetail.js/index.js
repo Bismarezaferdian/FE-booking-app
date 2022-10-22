@@ -6,9 +6,18 @@ import Navbar from "../../components/Navbar";
 import PropertyPart from "../../components/PropertyPart";
 import HotelDesc from "../../parts/HotelDesc";
 import HotelImage from "../../parts/HotelImage";
+import { useLocation } from "react-router-dom";
 import { HotelContent, TitleDetail } from "./HotelDetailStyle";
+import useFetch from "../../hooks/useFetch";
 
 const Hotel = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const { data, loading } = useFetch(`/api/v1/hotel/find/${id}`);
+
+  // console.log(data);
+
   const Image = [
     {
       src: require("../../assets/images/hotel-detail.jpg"),
@@ -26,15 +35,13 @@ const Hotel = () => {
       src: require("../../assets/images/hotel-detail5.jpg"),
     },
   ];
-
-  // console.log(Image);
   return (
     <div>
       <Navbar />
       <Header type="list" />
       <HotelContent>
-        <HotelImage Image={Image} />
-        <HotelDesc Image={Image} />
+        <HotelImage data={data.photo} />
+        <HotelDesc Image={Image} data={data} id={id} />
         <TitleDetail>Other Hotel</TitleDetail>
         <PropertyPart />
         <Mail />

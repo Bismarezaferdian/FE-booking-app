@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
@@ -22,8 +22,9 @@ import {
   ListWrapp,
   Location,
   SpanDate,
+  WrappSkeleton,
 } from "./ListStyle";
-import { Date, DateWrapp, Span } from "../../components/Header/HeaderStyle";
+import { Date } from "../../components/Header/HeaderStyle";
 import { DateRange } from "react-date-range";
 import HotelList from "../../components/HotelList.js/index";
 import Footer from "../../components/Footer";
@@ -31,11 +32,9 @@ import Mail from "../../components/Mail.js";
 import useFetch from "../../hooks/useFetch";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { Skeleton } from "@mui/material";
 
 const List = () => {
-  const [input, setInput] = useState("");
-  const [text, setText] = useState("");
-
   const datas = useContext(SearchContext);
   // console.log(datas.date);
 
@@ -49,17 +48,18 @@ const List = () => {
   const [max, setMax] = useState("");
 
   const { data, loading, reFetch } = useFetch(
-    `http://localhost:8000/api/v1/hotel?feature=true&city=${destination}`
+    `/api/v1/hotel?feature=true&city=${destination}&min=${min || 0}&max=${
+      max || 10000000
+    }`
   );
-  // &min=${
-  //   min || 0
-  // }&max=${max || 9999}
+
   const handleClick = () => {
     reFetch();
   };
 
   const { option } = useContext(SearchContext);
 
+  // console.log(data);
   // console.log(destination);
   return (
     <ListSec>
@@ -132,13 +132,24 @@ const List = () => {
           {/* flex3 column */}
           <ListResult>
             {loading ? (
-              "please wait page is loading......."
+              <WrappSkeleton>
+                <Skeleton
+                  variant="rectangular"
+                  width={window.innerWidth < 480 ? 360 : 720}
+                  height={window.innerWidth < 480 ? 180 : 280}
+                />
+                <Skeleton
+                  variant="rectangular"
+                  width={window.innerWidth < 480 ? 360 : 720}
+                  height={window.innerWidth < 480 ? 180 : 280}
+                />
+              </WrappSkeleton>
             ) : (
-              <>
+              <div>
                 {data.map((item) => (
                   <HotelList item={item} key={item._id} />
                 ))}
-              </>
+              </div>
             )}
           </ListResult>
         </ListWrapp>

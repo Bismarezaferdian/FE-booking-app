@@ -1,11 +1,17 @@
 import React from "react";
+import {
+  CompletedCountainer,
+  CompletedText,
+  CompletedWrapp,
+} from "./CompletedStyle";
 
-const Completed = ({ data }) => {
-  console.log(data);
+const Completed = () => {
   return (
-    <div>
-      <h1>yay completed payment</h1>
-    </div>
+    <CompletedCountainer>
+      <CompletedWrapp>
+        <CompletedText>Yay Completed Payment</CompletedText>
+      </CompletedWrapp>
+    </CompletedCountainer>
   );
 };
 

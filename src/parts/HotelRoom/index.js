@@ -1,3 +1,4 @@
+import { Skeleton } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,6 @@ import useFetch from "../../hooks/useFetch";
 import { Bath, IconWrapp } from "../HotelDesc/HotelDescStyle";
 import {
   ButtonRoom,
-  CardImgWrap,
   CardRoom,
   Content,
   ContentRoomWrap,
@@ -26,7 +26,6 @@ import {
   RoomDesc,
   RoomFasilitas,
   RoomH1,
-  RoomImg,
   RoomTitle,
   WrapDesc,
 } from "./HotelRoomStyle";
@@ -34,11 +33,8 @@ import {
 const HotelRoom = ({ id, hotel }) => {
   // console.log(hotel);
   const [selectedRoom, setSelectedRoom] = useState([]);
-  const { data, loading } = useFetch(
-    `http://localhost:8000/api/v1/hotel/room/${id}`
-  );
+  const { data, loading } = useFetch(`/api/v1/hotel/room/${id}`);
 
-  console.log(selectedRoom);
   const { date } = useContext(SearchContext);
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -83,7 +79,7 @@ const HotelRoom = ({ id, hotel }) => {
         await Promise.all(
           selectedRoom.map((roomId) => {
             return axios.put(
-              `http://localhost:8000/api/v1/room/availability/${roomId}`,
+              `${process.env.REACT_APP_HOST}/api/v1/room/availability/${roomId}`,
               {
                 dates: alldates,
               }
@@ -103,71 +99,72 @@ const HotelRoom = ({ id, hotel }) => {
     }).format(number);
   };
 
-  const Image = [
-    {
-      src: require("../../assets/images/feature-villa1.jpg"),
-    },
-  ];
-
   return (
     <RoomContainer id="reservasi">
       <ToastContainer autoClose={3000} />
       <RoomTitle>Check Aviable Rooms</RoomTitle>
-      <RoomContentWrap>
-        {data.map((room, i) => (
-          <CardRoom key={i}>
-            <CardImgWrap>
-              <RoomImg src={Image[0].src} />
-            </CardImgWrap>
+      {loading ? (
+        <Skeleton
+          sx={{ bgcolor: "grey" }}
+          variant="rectangular"
+          width={window.innerWidth < 480 ? 360 : 720}
+          height={window.innerWidth < 480 ? 180 : 280}
+        />
+      ) : (
+        <RoomContentWrap>
+          {data.map((room, i) => (
+            <CardRoom key={i}>
+              <ContentRoomWrap>
+                <RoomH1>{room.title}</RoomH1>
+                <IconWrapp>
+                  <div>
+                    <Bed /> <WrapDesc>Double Bed</WrapDesc>
+                  </div>
+                  <div>
+                    <Wifi />
+                    <WrapDesc>Wifi</WrapDesc>
+                  </div>
+                  <div>
+                    <Tv />
+                    <WrapDesc>Tv</WrapDesc>
+                  </div>
+                  <div>
+                    <Bath />
+                    <WrapDesc>bathroom</WrapDesc>
+                  </div>
+                </IconWrapp>
+                <Content>
+                  <div>
+                    <RoomDesc>{room.desc}</RoomDesc>
 
-            <ContentRoomWrap>
-              <RoomH1>{room.title}</RoomH1>
-              <IconWrapp>
-                <div>
-                  <Bed /> <WrapDesc>Double Bed</WrapDesc>
-                </div>
-                <div>
-                  <Wifi />
-                  <WrapDesc>Wifi</WrapDesc>
-                </div>
-                <div>
-                  <Tv />
-                  <WrapDesc>Tv</WrapDesc>
-                </div>
-                <div>
-                  <Bath />
-                  <WrapDesc>bathroom</WrapDesc>
-                </div>
-              </IconWrapp>
-              <Content>
-                <div>
-                  <RoomDesc>{room.desc}</RoomDesc>
-
-                  <RoomFasilitas>
-                    {room.roomNumbers.map((roomNumber, i) => (
-                      <div key={i}>
-                        <InputNumb
-                          value={roomNumber._id}
-                          onChange={handleSelected}
-                          disabled={!isAvailable(roomNumber)}
-                          // disabled={true}
-                        />
-                        <Label>{roomNumber.number}</Label>
-                      </div>
-                    ))}
-                  </RoomFasilitas>
-                </div>
-                <div style={{ textAlign: "right", marginRight: "20px" }}>
-                  <HotelPrice>idr {rupiah(room.price)}</HotelPrice>
-                  <HotelPerNight>1 night 1 room</HotelPerNight>
-                  <HotelDescCancel>free cancelation</HotelDescCancel>
-                  <ButtonRoom onClick={handleClick}>Reservation Now</ButtonRoom>
-                </div>
-              </Content>
-            </ContentRoomWrap>
-          </CardRoom>
-        ))}
-      </RoomContentWrap>
+                    <RoomFasilitas>
+                      {room.roomNumbers.map((roomNumber, i) => (
+                        <div key={i}>
+                          <InputNumb
+                            value={roomNumber._id}
+                            onChange={handleSelected}
+                            disabled={!isAvailable(roomNumber)}
+                            // disabled={true}
+                          />
+                          <Label>{roomNumber.number}</Label>
+                        </div>
+                      ))}
+                    </RoomFasilitas>
+                  </div>
+                  <div style={{ textAlign: "right", marginRight: "20px" }}>
+                    <HotelPrice>idr {rupiah(room.price)}</HotelPrice>
+                    <HotelPerNight>1 night 1 room</HotelPerNight>
+                    <HotelDescCancel>free cancelation</HotelDescCancel>
+                    <ButtonRoom onClick={handleClick}>
+                      Reservation Now
+                    </ButtonRoom>
+                  </div>
+                </Content>
+              </ContentRoomWrap>
+            </CardRoom>
+          ))}
+        </RoomContentWrap>
+      )}
     </RoomContainer>
   );
 };

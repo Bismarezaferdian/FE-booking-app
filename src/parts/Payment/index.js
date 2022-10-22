@@ -19,7 +19,7 @@ import {
   TitleWrap,
 } from "./PaymentStyle";
 
-function Payment({ date, payment, setPayment, data, handleNext, activeStep }) {
+function Payment({ date, setPayment }) {
   const handleChange = (e) => {
     return setPayment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

@@ -20,11 +20,10 @@ import {
   Rating,
   RatingWrapp,
 } from "./PartStyle";
+import { Skeleton } from "@mui/material";
 
 const PropertyPart = () => {
-  const { data, loading } = useFetch(
-    "http://localhost:8000/api/v1/hotel?feature=true&limit=4"
-  );
+  const { data, loading } = useFetch("/api/v1/hotel?feature=true&limit=4");
   const [views, setView] = useState(getWindowSize());
 
   function getWindowSize() {
@@ -56,53 +55,62 @@ const PropertyPart = () => {
   return (
     <PropertySec>
       <PartContainer>
-        {loading ? (
-          "please wait is loading "
-        ) : (
-          <>
-            <Swiper
-              slidesPerView={views.innerWidth <= 768 ? 2 : 4}
-              spaceBetween={30}
-              // pagination={{
-              //   clickable: true,
-              // }}
-              // navigation={true}
-              draggable={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {image &&
-                data.map((item, i) => (
-                  <SwiperSlide>
-                    <PartItems key={i}>
+        <>
+          <Swiper
+            slidesPerView={views.innerWidth <= 768 ? 2 : 4}
+            spaceBetween={30}
+            // pagination={{
+            //   clickable: true,
+            // }}
+            // navigation={true}
+            draggable={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {data &&
+              image.map((item, i) => (
+                <SwiperSlide key={i}>
+                  {loading ? (
+                    <>
+                      <Skeleton
+                        variant="rectangular"
+                        width={160}
+                        height={118}
+                      />
+                      <Skeleton width="80%" />
+                      <Skeleton width="30%" />
+                      <Skeleton width="80%" />
+                    </>
+                  ) : (
+                    <PartItems>
                       {/* <PartImg src={item.photo[0]} /> */}
 
                       <div>
-                        <PartImg src={image[i]} />
+                        <PartImg src={item} />
                       </div>
 
                       <PartTitleWrapp>
-                        <PartTitle to={`/hotels/${item._id}`}>
+                        <PartTitle to={`/hotels/${data[i]?._id}`}>
                           {" "}
-                          {item.name}
+                          {data[i]?.name}
                         </PartTitle>
-                        <PartCity>{item.city}</PartCity>
+                        <PartCity>{data[i]?.city}</PartCity>
                         <PartPrice>
-                          starting from {rupiah(item.cheapestPrice)}
+                          starting from {rupiah(data[i]?.cheapestPrice)}
                         </PartPrice>
-                        {item.rating && (
+                        {data[i]?.rating && (
                           <RatingWrapp>
-                            <PartRating>{item.rating}</PartRating>
+                            <PartRating>{data[i]?.rating}</PartRating>
                             <Rating>Exellent</Rating>
                           </RatingWrapp>
                         )}
                       </PartTitleWrapp>
                     </PartItems>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </>
-        )}
+                  )}
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </>
       </PartContainer>
     </PropertySec>
   );

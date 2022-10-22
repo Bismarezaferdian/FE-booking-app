@@ -1,7 +1,10 @@
 import React from "react";
-import Feature1 from "../../assets/images/feature-villa1.jpg";
-import Feature2 from "../../assets/images/feature-villa2.jpg";
-import Feature3 from "../../assets/images/feature-villa3.jpg";
+import Jakarta from "../../assets/images/jakarta-display.jpg";
+import Bandung from "../../assets/images/bandung-display.jpg";
+import Surabaya from "../../assets/images/surabaya-display.jpg";
+import Bogor from "../../assets/images/bogor-display.jpg";
+import Semarang from "../../assets/images/semarang-display.jpg";
+import Yogyakarta from "../../assets/images/yogyakarta-display.jpg";
 import useFetch from "../../hooks/useFetch";
 import {
   FeatureContainer,
@@ -12,65 +15,74 @@ import {
   FeatureTitle,
   FeatureTitleWrapp,
 } from "./FeatureElement";
+import { Skeleton } from "@mui/material";
 
 const Feature = () => {
   const { data, loading } = useFetch(
-    "http://localhost:8000/api/v1/hotel/countCity?cities=jakarta,lampung,bandung,yogyakarta,surabaya,bali"
+    "/api/v1/hotel/countCity?cities=jakarta,bogor,bandung,yogyakarta,surabaya,semarang"
   );
+
+  const datas = [
+    {
+      id: 1,
+      city: "Jakarta",
+      img: Jakarta,
+    },
+    {
+      id: 2,
+      city: "bogor",
+      img: Bogor,
+    },
+    {
+      id: 3,
+      city: "bandung",
+      img: Bandung,
+    },
+    {
+      id: 4,
+      city: "Yogjakarta",
+      img: Yogyakarta,
+    },
+    {
+      id: 5,
+      city: "surabaya",
+      img: Surabaya,
+    },
+    {
+      id: 6,
+      city: "semarang",
+      img: Semarang,
+    },
+  ];
 
   return (
     <FeatureSec>
-      <>
-        {" "}
-        {loading ? (
-          "is loading "
-        ) : (
-          <FeatureContainer>
-            <FeatureItems>
-              <FeatureImg src={Feature1} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>Jakarta</FeatureTitle>
-                <FeatureSubTitle>{data[0]} Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-            <FeatureItems>
-              <FeatureImg src={Feature2} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>lampung</FeatureTitle>
-                <FeatureSubTitle>{data[1]} Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-            <FeatureItems>
-              <FeatureImg src={Feature3} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>Bandung</FeatureTitle>
-                <FeatureSubTitle>{data[2]}Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-            <FeatureItems>
-              <FeatureImg src={Feature3} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>Yogjakarta</FeatureTitle>
-                <FeatureSubTitle>{data[3]} Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-            <FeatureItems>
-              <FeatureImg src={Feature3} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>Surabaya</FeatureTitle>
-                <FeatureSubTitle>{data[4]} Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-            <FeatureItems>
-              <FeatureImg src={Feature3} />
-              <FeatureTitleWrapp>
-                <FeatureTitle>Bali</FeatureTitle>
-                <FeatureSubTitle>{data[5]} Properties</FeatureSubTitle>
-              </FeatureTitleWrapp>
-            </FeatureItems>
-          </FeatureContainer>
-        )}
-      </>
+      <FeatureContainer>
+        {loading
+          ? datas.map((item) => (
+              <div key={item.id}>
+                <Skeleton
+                  sx={{ bgcolor: "grey.900" }}
+                  variant="rectangular"
+                  width={window.innerWidth < 480 ? 200 : 300}
+                  height={window.innerHeight < 480 ? 240 : 380}
+                />
+              </div>
+            ))
+          : datas.map((item) => (
+              <div key={item.id}>
+                <FeatureItems>
+                  <FeatureImg src={item.img} />
+                  <FeatureTitleWrapp>
+                    <FeatureTitle>{item.city}</FeatureTitle>
+                    <FeatureSubTitle>
+                      {data[item.id]} Properties
+                    </FeatureSubTitle>
+                  </FeatureTitleWrapp>
+                </FeatureItems>
+              </div>
+            ))}
+      </FeatureContainer>
     </FeatureSec>
   );
 };

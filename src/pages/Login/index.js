@@ -20,7 +20,6 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-
   const { user, loading, error, dispatch } = useContext(AuthContext);
 
   const handleChange = (e) => {
@@ -36,7 +35,7 @@ const Login = () => {
     toast("success login");
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/auth/login",
+        `${process.env.REACT_APP_HOST}/api/v1/auth/login`,
         credentials
       );
 
@@ -44,7 +43,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-      // console.log(err.response.data.message);
+      console.log(err.response.data);
     }
   };
 

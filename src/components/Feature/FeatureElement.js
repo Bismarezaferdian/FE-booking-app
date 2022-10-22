@@ -10,9 +10,9 @@ export const FeatureContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-around;
   gap: 20px;
+  padding: 10px;
   width: 100%;
   max-width: 1024px;
-
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
     padding: 10px;
@@ -28,8 +28,9 @@ export const FeatureItems = styled.div`
   color: white;
   border-radius: 10px;
   overflow: hidden;
-  max-height: 250px;
-  flex: 1;
+  /* max-height: 250px; */
+
+  /* flex: 1; */
   @media screen and (max-width: 768px) {
     column-gap: 5px;
   }
@@ -42,6 +43,7 @@ export const FeatureImg = styled.img`
   width: 100%;
   height: 100%;
   max-width: 526px;
+  height: 380px;
   object-fit: cover;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;

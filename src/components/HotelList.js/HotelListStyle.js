@@ -138,12 +138,13 @@ export const HotelLocation = styled.p`
   margin-bottom: 12px;
   text-transform: capitalize;
   opacity: 0.6;
+  font-size: 12px;
   @media screen and (max-width: 768px) {
-    font-size: 14px;
+    font-size: 10px;
     margin-bottom: 8px;
   }
   @media screen and (max-width: 480px) {
-    font-size: 10px;
+    font-size: 8px;
     margin-bottom: 2px;
   }
 `;

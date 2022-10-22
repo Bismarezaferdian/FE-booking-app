@@ -16,13 +16,13 @@ import {
   PropertySubTitle,
   PropertyTitle,
   PropertyTitleWrapp,
+  WrappSkeleton,
 } from "./PropertyStyle";
+import { Skeleton } from "@mui/material";
 
 function PropertyList() {
   const [views, setView] = useState(getWindowSize());
-  const { data, loading } = useFetch(
-    "http://localhost:8000/api/v1/hotel/countType"
-  );
+  const { data, loading } = useFetch("/api/v1/hotel/countType");
 
   function getWindowSize() {
     const { innerWidth } = window;
@@ -42,26 +42,34 @@ function PropertyList() {
   }, []);
 
   // const view = window.screen.width;
-  console.log(views.innerWidth);
+  // console.log(views.innerWidth);
   const Image = [Hotel1, Hotel2, Villa, Villa2, Villa3];
   return (
     <PropertySec>
       <PropertyContainer>
-        {loading ? (
-          "plese wait is loading ....."
-        ) : (
-          <>
-            <Swiper
-              slidesPerView={views.innerWidth <= 768 ? 3 : 5}
-              spaceBetween={30}
-              draggable={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {data &&
-                Image.map((item, i) => (
-                  <SwiperSlide>
-                    <PropertyItems key={i}>
+        <>
+          <Swiper
+            slidesPerView={views.innerWidth <= 768 ? 3 : 5}
+            spaceBetween={30}
+            draggable={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {data &&
+              Image.map((item, i) => (
+                <SwiperSlide key={i}>
+                  {loading ? (
+                    <>
+                      <Skeleton
+                        variant="rectangular"
+                        width={160}
+                        height={118}
+                      />
+                      <Skeleton width="60%" />
+                      <Skeleton width="60%" />
+                    </>
+                  ) : (
+                    <PropertyItems>
                       <div>
                         <PropertyImg src={item} />
                       </div>
@@ -74,11 +82,11 @@ function PropertyList() {
                         </PropertySubTitle>
                       </PropertyTitleWrapp>
                     </PropertyItems>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </>
-        )}
+                  )}
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </>
       </PropertyContainer>
     </PropertySec>
   );

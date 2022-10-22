@@ -27,7 +27,7 @@ const SearchReducer = (state, action) => {
 export const SearchContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
 
-  console.log(state.destination);
+  // console.log(state.destination);
   useEffect(() => {
     localStorage.setItem("date", JSON.stringify(state.date));
   }, [state.date]);

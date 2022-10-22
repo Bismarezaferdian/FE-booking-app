@@ -10,7 +10,7 @@ import Navbar from "../../components/Navbar";
 import Payment from "../../parts/Payment";
 import { HomeCountainer } from "../../pages/Home/HomeStyle";
 import { Buttonwrapp, SteperContent, StepperWrap } from "./SteperStyle";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { BookingContext } from "../../context/BookingContex";
@@ -33,14 +33,15 @@ export default function Steper() {
   });
 
   const [error, setError] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
-  const [hotel] = useState({
-    title: location.state.hotel.title,
-    price: location.state.hotel.cheapestPrice,
-  });
-  const [data, setData] = useState();
+  // const [hotel] = useState({
+  //   title: location.state.hotel.title,
+  //   price: location.state.hotel.cheapestPrice,
+  // });
+  // const [data, setData] = useState();
+  const [setData] = useState();
   const { date } = useContext(SearchContext);
   const startDate = dateId(date[0].startDate);
   const endDate = dateId(date[0].endDate);
@@ -55,13 +56,6 @@ export default function Steper() {
     startDate: startDate,
     endDate: endDate,
   };
-
-  // const { data } = useAxiosPost(
-  //   "http://localhost:8000/api/v1/booking",
-  //   payload
-  // );
-  // // return setData(data);
-  // console.log(data);
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -80,16 +74,13 @@ export default function Steper() {
         booking.email === "" ||
         booking.phoneNumber === "")
     ) {
-      return (
-        // toast("Please fill up the blank fields below");
-        setError(!error)
-      );
+      return setError(!error);
     }
 
     if (activeStep === 1) {
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/v1/booking",
+          `${process.env.REACT_APP_HOST}/api/v1/booking`,
           payload
         );
         setData(response.data);
@@ -115,25 +106,6 @@ export default function Steper() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  // const handleSkip = () => {
-  //   if (!isStepOptional(activeStep)) {
-  //     // You probably want to guard against something like this,
-  //     // it should never occur unless someone's actively trying to break something.
-  //     throw new Error("You can't skip a step that isn't optional.");
-  //   }
-
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   setSkipped((prevSkipped) => {
-  //     const newSkipped = new Set(prevSkipped.values());
-  //     newSkipped.add(activeStep);
-  //     return newSkipped;
-  //   });
-  // };
-
-  // const handleReset = () => {
-  //   setActiveStep(0);
-  // };
 
   return (
     <StepperWrap>
@@ -164,8 +136,8 @@ export default function Steper() {
             {activeStep === 0 && (
               <>
                 <Booking
-                  hotel={hotel}
-                  booking={booking}
+                  // hotel={hotel}
+                  // booking={booking}
                   setBooking={setBooking}
                   error={error}
                 />
@@ -180,7 +152,7 @@ export default function Steper() {
                 setPayment={setPayment}
               />
             )}
-            {activeStep === 2 && <Completed data={data} />}
+            {activeStep === 2 && <Completed />}
             <Buttonwrapp>
               <Button onClick={handleNext} align="center">
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}

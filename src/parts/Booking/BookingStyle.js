@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-export const BookingCountainer = styled.div``;
-export const BookingWrapp = styled.div``;
-export const BookingCard = styled.div`
-  display: flex;
-`;
-export const BookingImage = styled.div`
-  border: 2px solid gray;
-  width: 300px;
-`;
-export const ImageBooking = styled.img``;
-export const BookingContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  gap: 20px;
-`;
+// export const BookingCountainer = styled.div``;
+// export const BookingWrapp = styled.div``;
+// export const BookingCard = styled.div`
+//   display: flex;
+// `;
+// export const BookingImage = styled.div`
+//   border: 2px solid gray;
+//   width: 300px;
+// `;
+// export const ImageBooking = styled.img``;
+// export const BookingContent = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 300px;
+//   gap: 20px;
+// `;
 
 export const LogoName = styled.h1`
   font-weight: 600;
@@ -25,11 +25,17 @@ export const LogoName = styled.h1`
   text-decoration: none;
   color: black;
   text-align: center;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
-export const ContentName = styled.p`
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: capitalize;
-  margin-top: 4px;
-`;
+// export const ContentName = styled.p`
+//   font-size: 18px;
+//   font-weight: 500;
+//   text-transform: capitalize;
+//   margin-top: 4px;
+// `;

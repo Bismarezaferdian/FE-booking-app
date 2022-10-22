@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   HotelImg,
@@ -7,13 +7,19 @@ import {
   ImgWrapp,
 } from "./ImgStyle";
 
-const HotelImage = ({ Image }) => {
+const HotelImage = ({ data }) => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    setImages(data);
+  }, [data]);
+
   return (
     <HotelImgWrapp>
       <HotelImgContainer>
-        {Image.map((item, index) => (
+        {images?.slice(0, 3).map((item, index) => (
           <ImgWrapp key={index}>
-            <HotelImg src={item.src} />
+            <HotelImg src={item} />
           </ImgWrapp>
         ))}
       </HotelImgContainer>

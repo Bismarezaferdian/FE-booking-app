@@ -124,6 +124,12 @@ export const BtnWrapp = styled.div`
   margin-top: 20px;
 `;
 
+export const WrappSkeleton = styled.div`
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+`;
+
 export const BtnListSeacrh = styled.button`
   display: flex;
   align-items: center;

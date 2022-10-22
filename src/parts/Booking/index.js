@@ -14,15 +14,13 @@ import {
 import { LogoName } from "./BookingStyle";
 import { Dot } from "../../components/Navbar/NavbarStyle";
 
-const Booking = ({ hotel, error, setBooking, booking }) => {
+const Booking = ({ error, setBooking }) => {
   // const [booking, setbooking] = useState({
   //   firstName: "",
   //   lastName: "",
   //   email: "",
   //   phoneNumber: "",
   // });
-
-  console.log(booking);
 
   // state di pindah ke stepper
 

@@ -49,7 +49,7 @@ const HotelList = ({ item }) => {
     <HotelCard>
       <HotelImgWrapp>
         {/* <HotelImg src={Hotel} /> */}
-        <HotelImg src={item.photo} />
+        <HotelImg src={item.photo[0]} />
       </HotelImgWrapp>
       <HotelDescWrapp>
         <HotelDetailContainer>
