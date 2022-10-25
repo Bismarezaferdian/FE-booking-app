@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -32,6 +32,7 @@ import {
   Minus,
   Plus,
   Train,
+  HeaderWrappButton,
 } from "./HeaderStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
@@ -237,7 +238,8 @@ function Header({ type }) {
                   </Option>
                 )}
               </HeaderSearchItems>
-              <HeaderSearchItems>
+
+              <HeaderWrappButton>
                 <HeaderSearchBtn
                   // disabled={destination === "" ? true : false}
                   onClick={handleSubmit}
@@ -245,7 +247,7 @@ function Header({ type }) {
                   {" "}
                   Search
                 </HeaderSearchBtn>
-              </HeaderSearchItems>
+              </HeaderWrappButton>
             </HeaderSearch>
           </>
         )}

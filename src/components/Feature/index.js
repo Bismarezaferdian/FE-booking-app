@@ -64,7 +64,7 @@ const Feature = () => {
                 <Skeleton
                   sx={{ bgcolor: "grey.900" }}
                   variant="rectangular"
-                  width={window.innerWidth < 480 ? 200 : 300}
+                  width={window.innerWidth < 480 ? 180 : 300}
                   height={window.innerHeight < 480 ? 240 : 380}
                 />
               </div>

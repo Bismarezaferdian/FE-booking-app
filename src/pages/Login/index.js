@@ -4,35 +4,62 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContex";
 import { ToastContainer, toast } from "react-toastify";
 import {
-  InputPassword,
-  InputUser,
+  ErrorMsg,
+  InputWrapp,
+  LinkTo,
   LogButton,
-  LogCard,
-  LogContainer,
-  LogTitle,
+  LoginCard,
+  LoginContainer,
+  LoginFooter,
+  LoginHeadTitle,
+  LoginWrapp,
+  SpanContent,
 } from "./LoginStyle";
 import "react-toastify/dist/ReactToastify.css";
+import { Dot } from "../../components/Navbar/NavbarStyle";
+import styled from "@emotion/styled";
+import { TextField } from "@mui/material";
+
+const MyTextField = styled(TextField)({
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "white",
+    },
+  },
+});
 
 const Login = () => {
+  const [err, setErr] = useState(false);
   const [credentials, setCredentials] = useState({
     userName: undefined,
     password: undefined,
   });
 
   const navigate = useNavigate();
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { error, loading, dispatch } = useContext(AuthContext);
+
+  const successAlert = () => {
+    // window.alert("Invalid Credentials");
+    toast("success login !", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  // const viewToas = () => toast("success login");
-
   const handleClick = async (e) => {
     e.preventDefault();
 
     dispatch({ type: "LOGIN_START" });
-    toast("success login");
+
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_HOST}/api/v1/auth/login`,
@@ -40,24 +67,69 @@ const Login = () => {
       );
 
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      successAlert();
       navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-      console.log(err.response.data);
+      setErr(true);
     }
   };
 
   return (
-    <LogContainer>
+    <LoginContainer>
       <ToastContainer />
-      <LogCard>
-        <LogTitle> Login</LogTitle>
-        <InputUser id="userName" onChange={handleChange} />
-        <InputPassword id="password" onChange={handleChange} />
-        <LogButton onClick={handleClick}>Login</LogButton>
-      </LogCard>
-      {error && <span>{error.message}</span>}
-    </LogContainer>
+      <LoginHeadTitle>
+        Traveler
+        <Dot />
+        com{" "}
+      </LoginHeadTitle>
+      <LoginWrapp>
+        <LoginCard>
+          {/* <LogTitle> Login</LogTitle> */}
+          <InputWrapp>
+            <MyTextField
+              label="User Name"
+              variant="outlined"
+              size="small"
+              type="text"
+              color="error"
+              placeholder="user name"
+              id="userName"
+              autoFocus
+              onChange={handleChange}
+              required
+              error={err}
+              helperText={error ? "is required" : ""}
+            />
+            <MyTextField
+              label="Password"
+              variant="outlined"
+              size="small"
+              type="password"
+              color="error"
+              placeholder="password"
+              id="password"
+              // backgroundColor="red"
+              onChange={handleChange}
+              required
+              error={err}
+              helperText={error ? "is required" : ""}
+            />
+            {/* <InputUser id="userName" onChange={handleChange} />
+            <InputPassword id="password" onChange={handleChange} /> */}
+            {error && <ErrorMsg>{error.message}</ErrorMsg>}
+          </InputWrapp>
+          <LogButton onClick={handleClick} disabled={loading ? true : false}>
+            Login
+          </LogButton>
+          <LoginFooter>
+            <SpanContent>
+              Don't have an account? <LinkTo to="/register">Sign Up</LinkTo>
+            </SpanContent>
+          </LoginFooter>
+        </LoginCard>
+      </LoginWrapp>
+    </LoginContainer>
   );
 };
 

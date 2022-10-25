@@ -172,12 +172,15 @@ export const HeaderSearchItems = styled.div`
   gap: 20px;
   z-index: 1;
   &:nth-child(2) {
-    z-index: 999;
+    z-index: 99;
     @media screen and (max-width: 768px) {
-      z-index: 999;
+      z-index: 99;
     }
   }
   &:nth-child(4) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
     border: none;
   }
 
@@ -189,8 +192,12 @@ export const HeaderSearchItems = styled.div`
   }
 `;
 
+export const HeaderWrappButton = styled.div``;
+
 export const HeaderSearchBtn = styled.button`
   display: flex;
+  z-index: 1;
+  /* display: none; */
   align-items: center;
   padding: 8px 14px;
   text-transform: uppercase;
@@ -213,7 +220,7 @@ export const Input = styled.input.attrs({
 export const DateWrapp = styled.div`
   position: absolute;
   top: 50px;
-  z-index: 999;
+  /* z-index: 99; */
   @media screen and (max-width: 768px) {
   }
   @media screen and (max-width: 480px) {
@@ -231,7 +238,7 @@ export const DateBtn = styled.button`
   color: #ffff;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 99;
 `;
 
 export const Option = styled.div`
@@ -240,6 +247,15 @@ export const Option = styled.div`
   border: 2px solid black;
   background-color: #fff;
   border-radius: 4px;
+  z-index: 999;
+  @media screen and (max-width: 768px) {
+    transform: translate(-4%, 20%);
+  }
+  @media screen and (max-width: 480px) {
+    transform: translate(-4%, 110%);
+    z-index: 999;
+    /* background: red; */
+  }
 `;
 
 export const OptionItems = styled.div`
@@ -248,9 +264,12 @@ export const OptionItems = styled.div`
   align-items: center;
   width: 200px;
   margin: 10px;
+  z-index: 999;
 `;
 
-export const OptionText = styled.span``;
+export const OptionText = styled.span`
+  z-index: 999;
+`;
 
 export const OptionCounterBtn = styled.button`
   display: flex;
@@ -260,11 +279,15 @@ export const OptionCounterBtn = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 999;
 `;
 
-export const OptionCounter = styled.span``;
+export const OptionCounter = styled.span`
+  z-index: 999;
+`;
 
 export const OptionBtnWrapp = styled.div`
   display: flex;
   gap: 20px;
+  z-index: 999;
 `;
