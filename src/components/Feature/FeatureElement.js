@@ -41,7 +41,7 @@ export const FeatureItems = styled.div`
 
 export const FeatureImg = styled.img`
   width: 100%;
-  height: 100%;
+  height: f 100%;
   max-width: 526px;
   height: 380px;
   object-fit: cover;

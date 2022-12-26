@@ -1,4 +1,3 @@
-import { Routes, Route } from "react-router-dom";
 import Steper from "./element/Steper";
 import Home from "./pages/Home";
 import HotelDetail from "./pages/HotelDetail.js";
@@ -6,6 +5,9 @@ import List from "./pages/List";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Soon from "./pages/soon";
+import { Routes, Route } from "react-router-dom";
+
+//update
 
 function App() {
   return (
