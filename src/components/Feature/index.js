@@ -18,47 +18,26 @@ import {
 import { Skeleton } from "@mui/material";
 
 const Feature = () => {
-  const { data, loading } = useFetch(
-    "/api/v1/hotel/countCity?cities=jakarta,bogor,bandung,yogyakarta,surabaya,semarang"
-  );
-
-  const datas = [
-    {
-      id: 1,
-      city: "Jakarta",
-      img: Jakarta,
-    },
-    {
-      id: 2,
-      city: "bogor",
-      img: Bogor,
-    },
-    {
-      id: 3,
-      city: "bandung",
-      img: Bandung,
-    },
-    {
-      id: 4,
-      city: "Yogjakarta",
-      img: Yogyakarta,
-    },
-    {
-      id: 5,
-      city: "surabaya",
-      img: Surabaya,
-    },
-    {
-      id: 6,
-      city: "semarang",
-      img: Semarang,
-    },
-  ];
+  const { data, loading } = useFetch("/api/v1/place/count");
 
   return (
     <FeatureSec>
       <FeatureContainer>
-        {loading
+        {data.map((item) => (
+          <div key={item._id}>
+            <FeatureItems>
+              <FeatureImg src={item.image} />
+              <FeatureTitleWrapp>
+                <FeatureTitle>{item.city}</FeatureTitle>
+                <FeatureSubTitle>
+                  {item.countAllHotel.length} Properties
+                </FeatureSubTitle>
+              </FeatureTitleWrapp>
+            </FeatureItems>
+          </div>
+        ))}
+
+        {/* {loading
           ? datas.map((item) => (
               <div key={item.id}>
                 <Skeleton
@@ -81,10 +60,43 @@ const Feature = () => {
                   </FeatureTitleWrapp>
                 </FeatureItems>
               </div>
-            ))}
+            ))} */}
       </FeatureContainer>
     </FeatureSec>
   );
 };
 
 export default Feature;
+
+// const dataFeature = [
+//   {
+//     id: 1,
+//     city: "Jakarta",
+//     img: Jakarta,
+//   },
+//   {
+//     id: 2,
+//     city: "bogor",
+//     img: Bogor,
+//   },
+//   {
+//     id: 3,
+//     city: "bandung",
+//     img: Bandung,
+//   },
+//   {
+//     id: 4,
+//     city: "Yogjakarta",
+//     img: Yogyakarta,
+//   },
+//   {
+//     id: 5,
+//     city: "surabaya",
+//     img: Surabaya,
+//   },
+//   {
+//     id: 6,
+//     city: "semarang",
+//     img: Semarang,
+//   },
+// ];

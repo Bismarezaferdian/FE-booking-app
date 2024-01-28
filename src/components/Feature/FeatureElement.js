@@ -26,9 +26,10 @@ export const FeatureContainer = styled.div`
 export const FeatureItems = styled.div`
   position: relative;
   color: white;
+  background-color: black;
   border-radius: 10px;
   overflow: hidden;
-  /* max-height: 250px; */
+  max-height: 350px;
 
   /* flex: 1; */
   @media screen and (max-width: 768px) {
@@ -40,9 +41,11 @@ export const FeatureItems = styled.div`
 `;
 
 export const FeatureImg = styled.img`
+  position: relative;
   width: 100%;
-  height: f 100%;
+  height: 100%;
   max-width: 526px;
+  opacity: 0.6;
   height: 380px;
   object-fit: cover;
   -webkit-transition: 0.4s ease;
@@ -55,7 +58,7 @@ export const FeatureImg = styled.img`
 
 export const FeatureTitleWrapp = styled.div`
   position: absolute;
-  transform: translate(20px, -80px);
+  transform: translate(20px, -100px);
 `;
 
 export const FeatureTitle = styled.h1`

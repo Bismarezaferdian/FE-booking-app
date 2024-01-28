@@ -22,7 +22,8 @@ import { Skeleton } from "@mui/material";
 
 function PropertyList() {
   const [views, setView] = useState(getWindowSize());
-  const { data, loading } = useFetch("/api/v1/hotel/countType");
+  const { data, loading } = useFetch("/api/v1/properties/count");
+  console.log(data);
 
   function getWindowSize() {
     const { innerWidth } = window;
@@ -43,7 +44,7 @@ function PropertyList() {
 
   // const view = window.screen.width;
   // console.log(views.innerWidth);
-  const Image = [Hotel1, Hotel2, Villa, Villa2, Villa3];
+  // const Image = [Hotel1, Hotel2, Villa, Villa2, Villa3];
   return (
     <PropertySec>
       <PropertyContainer>
@@ -55,36 +56,29 @@ function PropertyList() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {data &&
-              Image.map((item, i) => (
-                <SwiperSlide key={i}>
-                  {loading ? (
-                    <>
-                      <Skeleton
-                        variant="rectangular"
-                        width={160}
-                        height={118}
-                      />
-                      <Skeleton width="60%" />
-                      <Skeleton width="60%" />
-                    </>
-                  ) : (
-                    <PropertyItems>
-                      <div>
-                        <PropertyImg src={item} />
-                      </div>
-                      <PropertyTitleWrapp>
-                        <PropertyTitle href="#search">
-                          {data[i]?.type}
-                        </PropertyTitle>
-                        <PropertySubTitle>
-                          {data[i]?.count} {data[i]?.type}
-                        </PropertySubTitle>
-                      </PropertyTitleWrapp>
-                    </PropertyItems>
-                  )}
-                </SwiperSlide>
-              ))}
+            {data.map((item, i) => (
+              <SwiperSlide key={i}>
+                {loading ? (
+                  <>
+                    <Skeleton variant="rectangular" width={160} height={118} />
+                    <Skeleton width="60%" />
+                    <Skeleton width="60%" />
+                  </>
+                ) : (
+                  <PropertyItems>
+                    <div>
+                      <PropertyImg src={item.image} />
+                    </div>
+                    <PropertyTitleWrapp>
+                      <PropertyTitle href="#search">{item.name}</PropertyTitle>
+                      <PropertySubTitle>
+                        {item.countAllProperties.length} property
+                      </PropertySubTitle>
+                    </PropertyTitleWrapp>
+                  </PropertyItems>
+                )}
+              </SwiperSlide>
+            ))}
           </Swiper>
         </>
       </PropertyContainer>
