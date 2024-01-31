@@ -9,16 +9,11 @@ import PropertyList from "../../components/PropertyList";
 import PropertyPart from "../../components/PropertyPart";
 import { AuthContext } from "../../context/AuthContex";
 import { HomeCountainer, HomeTitle } from "./HomeStyle";
+import useFetch from "../../hooks/useFetch.js";
+import { GetHotel } from "../../hooks/fetchApi.js";
 
 const Home = () => {
-  // const navigate = useNavigate();
-  // const { user } = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate, user]);
+  const { hotels, loading, error } = GetHotel();
 
   return (
     <>
@@ -26,9 +21,7 @@ const Home = () => {
       <Header />
       <HomeCountainer>
         <Feature />
-        <HomeTitle>Browse by property type</HomeTitle>
         <PropertyList />
-        <HomeTitle>Homes gues loved </HomeTitle>
         <PropertyPart />
       </HomeCountainer>
       <Mail />

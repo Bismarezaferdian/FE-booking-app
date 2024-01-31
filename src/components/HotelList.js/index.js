@@ -99,7 +99,7 @@ const HotelList = ({ item }) => {
           </HotelDetailContent>
           <HotelPriceWrapp>
             <HotelDiscCard>Disc 10% off</HotelDiscCard>
-            <HotelPriceDisc>idr {rupiah(item.cheapestPrice)}</HotelPriceDisc>
+            <HotelPriceDisc>{rupiah(item.cheapestPrice)}</HotelPriceDisc>
             <HotelPrice>
               <SpanIdr>idr</SpanIdr>
               {rupiah(priceCount)}

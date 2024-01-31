@@ -16,6 +16,7 @@ import {
   PartRating,
   PartTitle,
   PartTitleWrapp,
+  PropertyHeadTitle,
   PropertySec,
   Rating,
   RatingWrapp,
@@ -54,6 +55,8 @@ const PropertyPart = () => {
   };
   return (
     <PropertySec>
+      <PropertyHeadTitle>Home Gues Loved</PropertyHeadTitle>
+
       <PartContainer>
         <>
           <Swiper

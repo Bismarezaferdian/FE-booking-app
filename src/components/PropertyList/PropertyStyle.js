@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 export const PropertySec = styled.div`
-  display: grid;
   justify-content: center;
+`;
+
+export const PropertyHeadTitle = styled.h1`
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 700;
+  padding-bottom: 12px;
 `;
 
 export const PropertyContainer = styled.div`
@@ -10,6 +16,7 @@ export const PropertyContainer = styled.div`
   /* grid-template-columns: repeat(5, 1fr); */
   justify-content: center;
   /* display: flex; */
+
   gap: 20px;
   padding: 0 12px 0 12px;
   width: 100vw;

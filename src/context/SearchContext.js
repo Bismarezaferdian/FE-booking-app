@@ -3,7 +3,7 @@ import { createContext, useEffect, useReducer } from "react";
 const INITIAL_STATE = {
   destination: JSON.parse(localStorage.getItem("destination")) || "undefined",
   date: JSON.parse(localStorage.getItem("date")) || [],
-  option: {
+  option: JSON.parse(localStorage.getItem("option")) || {
     adult: 1,
     childern: 0,
     room: 1,
@@ -29,11 +29,14 @@ export const SearchContextProvider = ({ children }) => {
 
   // console.log(state.destination);
   useEffect(() => {
-    localStorage.setItem("date", JSON.stringify(state.date));
-  }, [state.date]);
-  useEffect(() => {
-    localStorage.setItem("destination", JSON.stringify(state.destination));
-  }, [state.destination]);
+    if (state.date) {
+      localStorage.setItem("date", JSON.stringify(state.date));
+    } else if (state.destination) {
+      localStorage.setItem("destination", JSON.stringify(state.destination));
+    } else if (state.option) {
+      localStorage.setItem("option", JSON.stringify(state.option));
+    }
+  }, [state.date, state.destination, state.option]);
 
   return (
     <SearchContext.Provider

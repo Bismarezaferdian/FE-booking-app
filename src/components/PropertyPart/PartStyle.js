@@ -2,8 +2,15 @@ import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 
 export const PropertySec = styled.div`
-  display: flex;
+  /* display: flex; */
   justify-content: center;
+`;
+
+export const PropertyHeadTitle = styled.h1`
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 700;
+  padding-bottom: 12px;
 `;
 
 export const PartContainer = styled.div`

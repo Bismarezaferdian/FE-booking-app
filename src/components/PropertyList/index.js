@@ -16,6 +16,7 @@ import {
   PropertySubTitle,
   PropertyTitle,
   PropertyTitleWrapp,
+  PropertyHeadTitle,
   WrappSkeleton,
 } from "./PropertyStyle";
 import { Skeleton } from "@mui/material";
@@ -23,7 +24,6 @@ import { Skeleton } from "@mui/material";
 function PropertyList() {
   const [views, setView] = useState(getWindowSize());
   const { data, loading } = useFetch("/api/v1/properties/count");
-  console.log(data);
 
   function getWindowSize() {
     const { innerWidth } = window;
@@ -47,6 +47,7 @@ function PropertyList() {
   // const Image = [Hotel1, Hotel2, Villa, Villa2, Villa3];
   return (
     <PropertySec>
+      <PropertyHeadTitle>Browse by property type</PropertyHeadTitle>
       <PropertyContainer>
         <>
           <Swiper

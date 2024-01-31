@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Jakarta from "../../assets/images/jakarta-display.jpg";
 import Bandung from "../../assets/images/bandung-display.jpg";
 import Surabaya from "../../assets/images/surabaya-display.jpg";
@@ -16,16 +16,29 @@ import {
   FeatureTitleWrapp,
 } from "./FeatureElement";
 import { Skeleton } from "@mui/material";
+import { SearchContext } from "../../context/SearchContext";
+import { Navigate } from "react-router-dom";
 
 const Feature = () => {
+  const { dispatch } = useContext(SearchContext);
+
   const { data, loading } = useFetch("/api/v1/place/count");
+  const handleClick = (city) => {
+    console.log(city);
+    // e.preventDefault();
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: city,
+    });
+    Navigate("/hotels", { state: city });
+  };
 
   return (
     <FeatureSec>
       <FeatureContainer>
         {data.map((item) => (
           <div key={item._id}>
-            <FeatureItems>
+            <FeatureItems onClick={() => handleClick(item.city)}>
               <FeatureImg src={item.image} />
               <FeatureTitleWrapp>
                 <FeatureTitle>{item.city}</FeatureTitle>

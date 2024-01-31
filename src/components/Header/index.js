@@ -62,8 +62,6 @@ function Header({ type }) {
     return location.pathname === path ? "active" : undefined;
   };
 
-  // console.log(getNavLi);
-
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
 

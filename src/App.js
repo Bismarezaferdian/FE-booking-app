@@ -5,11 +5,14 @@ import List from "./pages/List";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Soon from "./pages/soon";
+import Hotel from "./pages/HotelPage/index.jsx";
 import { Routes, Route } from "react-router-dom";
 
 //update
 
 function App() {
+  // console.log("first");
+
   return (
     <>
       <Routes>
@@ -24,6 +27,7 @@ function App() {
         <Route path="/rental" element={<Soon />} />
         <Route path="/atracttion" element={<Soon />} />
         <Route path="/train" element={<Soon />} />
+        <Route path="/hotel" element={<Hotel />} />
       </Routes>
     </>
   );

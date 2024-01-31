@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
@@ -29,38 +29,56 @@ import { DateRange } from "react-date-range";
 import HotelList from "../../components/HotelList.js/index";
 import Footer from "../../components/Footer";
 import Mail from "../../components/Mail.js";
-import useFetch from "../../hooks/useFetch";
-import { useContext } from "react";
-import { SearchContext } from "../../context/SearchContext";
 import { Skeleton } from "@mui/material";
+import PropertyPart from "../../components/PropertyPart/index.js";
+import { combineStore } from "../../zustand/store.js";
+import { GetHotel } from "../../hooks/fetchApi.js";
 
 const List = () => {
-  const datas = useContext(SearchContext);
-  // console.log(datas.date);
-
+  console.log("first");
+  const { hotel, addHotel } = combineStore();
+  const [search, setSearch] = useState("");
   const [openDate, setOpenDate] = useState("false");
   const location = useLocation();
-  const [destination, setDestination] = useState(datas.destination);
-  // const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
   // const [option, setOption] = useState(location.state.option);
-  const [min, setMin] = useState("");
-  const [max, setMax] = useState("");
 
-  const { data, loading, reFetch } = useFetch(
-    `/api/v1/hotel?feature=true&city=${destination}&min=${min || 0}&max=${
-      max || 10000000
-    }`
-  );
+  const { hotels, hotelLoading, hotelError } = GetHotel();
+  useEffect(() => {
+    if (hotels) {
+      addHotel(hotels);
+    }
+  }, [hotels, addHotel]);
 
-  const handleClick = () => {
-    reFetch();
+  useEffect(() => {
+    if (search) {
+      const filter = hotels
+        .map((hotel) => hotel)
+        .filter((item) => item?.place?.city === search);
+      addHotel(filter);
+    }
+  }, [search, hotels, addHotel]);
+
+  // const { data, loading, reFetch } = useFetch(
+  //   `/api/v1/hotel/all`
+  //   // &min=${min || 0}&max=${max || 10000000}`
+  // );
+
+  // const filter = hotels
+  //   ?.map((item) => item)
+  //   .filter((i) => i?.place?.city === "jakarta");
+
+  useEffect(() => {
+    combineStore.persist.rehydrate();
+  }, []);
+
+  console.log("test run");
+
+  const handleClick = (item) => {
+    setSearch(item);
   };
+  // const { option } = useContext(SearchContext);
 
-  const { option } = useContext(SearchContext);
-
-  // console.log(data);
-  // console.log(destination);
   return (
     <ListSec>
       <Navbar />
@@ -73,12 +91,12 @@ const List = () => {
             <ListItem>
               <ListLabel>Destination</ListLabel>
               <ListInput
-                placeholder={destination}
-                onChange={(e) => setDestination(e.target.value)}
+                placeholder={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <Location />
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <ListLabel>check-in date</ListLabel>
               <SpanDate>
                 {" "}
@@ -101,28 +119,28 @@ const List = () => {
                   />
                 </ListDateWrapp>
               )}
-            </ListItem>
+            </ListItem> */}
             <ListItem>
               <ListTitle>Option</ListTitle>
               <ListOption>
                 <ListLabelOption>Min Price per night</ListLabelOption>
-                <ListOptionInput onChange={(e) => setMin(e.target.value)} />
+                {/* <ListOptionInput onChange={(e) => setMin(e.target.value)} /> */}
               </ListOption>
               <ListOption>
                 <ListLabelOption>Max Price per night</ListLabelOption>
-                <ListOptionInput onChange={(e) => setMax(e.target.value)} />
+                {/* <ListOptionInput onChange={(e) => setMax(e.target.value)} /> */}
               </ListOption>
               <ListOption>
                 <ListLabelOption>adult</ListLabelOption>
-                <ListOptionInput min={1} placeholder={option.adult} />
+                {/* <ListOptionInput min={1} placeholder={option.adult} /> */}
               </ListOption>
               <ListOption>
                 <ListLabelOption>room</ListLabelOption>
-                <ListOptionInput min={1} placeholder={option.room} />
+                {/* <ListOptionInput min={1} placeholder={option.room} /> */}
               </ListOption>
               <ListOption>
                 <ListLabelOption>children</ListLabelOption>
-                <ListOptionInput min={0} placeholder={option.children} />
+                {/* <ListOptionInput min={0} placeholder={option.children} /> */}
               </ListOption>
               <BtnWrapp>
                 <BtnListSeacrh onClick={handleClick}>Search</BtnListSeacrh>
@@ -131,7 +149,7 @@ const List = () => {
           </ListSearch>
           {/* flex3 column */}
           <ListResult>
-            {loading ? (
+            {hotelLoading ? (
               <WrappSkeleton>
                 <Skeleton
                   variant="rectangular"
@@ -146,14 +164,16 @@ const List = () => {
               </WrappSkeleton>
             ) : (
               <div>
-                {data.map((item) => (
-                  <HotelList item={item} key={item._id} />
-                ))}
+                {hotels &&
+                  hotels?.map((item) => (
+                    <HotelList item={item} key={item._id} />
+                  ))}
               </div>
             )}
           </ListResult>
         </ListWrapp>
       </ListContainer>
+      <PropertyPart />
       <Mail />
       <Footer />
     </ListSec>
