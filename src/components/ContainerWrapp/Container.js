@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 1280px;
+  max-width: 100vw;
   min-height: max-content;
   overflow: hidden;
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
 `;
 
 export const ContentWrapp = styled.div`

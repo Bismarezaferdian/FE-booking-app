@@ -5,6 +5,7 @@ import {
   HotelImgContainer,
   HotelImgWrapp,
   ImgWrapp,
+  WrappContent,
 } from "./ImgStyle";
 
 const HotelImage = ({ data }) => {
@@ -18,9 +19,9 @@ const HotelImage = ({ data }) => {
     <HotelImgWrapp>
       <HotelImgContainer>
         {images?.slice(0, 3).map((item, index) => (
-          <ImgWrapp key={index}>
+          <div key={index}>
             <HotelImg src={item} />
-          </ImgWrapp>
+          </div>
         ))}
       </HotelImgContainer>
     </HotelImgWrapp>

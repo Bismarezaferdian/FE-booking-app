@@ -23,18 +23,19 @@ export const DateHotel = styled(FaCalendarAlt)`
 export const HotelCard = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid gray;
+  border: 1px solid gray;
   /* border: none; */
   /* margin: 30px 10px; */
+  margin: 15px 0;
   gap: 10px;
   width: 100%;
   border-radius: 4px;
   /* justify-content: center; */
   /* align-items: center; */
 
-  /* &:nth-child(1) {
-    margin-top: 30px;
-  } */
+  &:nth-child(1) {
+    margin-top: 0px;
+  }
   /* background: #e0e0e0;
   box-shadow: -31px -31px 61px #bebebe, 31px 31px 61px #ffffff; */
 `;

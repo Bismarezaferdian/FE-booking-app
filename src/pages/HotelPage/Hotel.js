@@ -1,10 +1,12 @@
 import { Button } from "@mui/material";
 import styled from "styled-components";
+import { Link as LinkR } from "react-router-dom";
 
 export const ContentContainer = styled.div`
   /* display: flex; */
   display: grid;
   row-gap: 12px;
+  width: 1280px;
   /* grid-row: auto; */
   /* flex-wrap: wrap; */
   /* justify-content: center; */
@@ -12,6 +14,8 @@ export const ContentContainer = styled.div`
 
 export const WrappContent = styled.div`
   display: grid;
+  grid-auto-flow: row;
+  padding: 24px 0;
 `;
 
 export const ButtonShowAll = styled.button`
@@ -42,4 +46,13 @@ export const Content = styled.div`
   display: grid;
   gap: 12px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+`;
+
+export const LinkToDetail = styled(LinkR)`
+  text-decoration: none;
+`;
+
+export const PlaceWrapp = styled.div`
+  /* width: 100vw; */
+  background-color: red;
 `;

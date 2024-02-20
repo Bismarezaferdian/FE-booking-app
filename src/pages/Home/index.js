@@ -25,7 +25,6 @@ const Home = () => {
         <PropertyPart />
       </HomeCountainer>
       <Mail />
-      <Footer />
     </>
   );
 };

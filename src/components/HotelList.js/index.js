@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Feature1 from "../../assets/images/feature-villa1.jpg";
 import { AuthContext } from "../../context/AuthContex";
 import {
   DateHotel,
@@ -44,11 +43,9 @@ const HotelList = ({ item }) => {
       currency: "IDR",
     }).format(number);
   };
-  // console.log(`../../assets/images/${item.photo[0]}`);
   return (
     <HotelCard>
       <HotelImgWrapp>
-        {/* <HotelImg src={Hotel} /> */}
         <HotelImg src={item.photo[0]} />
       </HotelImgWrapp>
       <HotelDescWrapp>

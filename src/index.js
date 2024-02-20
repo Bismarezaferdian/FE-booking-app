@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 import { SearchContextProvider } from "./context/SearchContext";
 import { AuthContextProvider } from "./context/AuthContex";
 import { BookingContextProvider } from "./context/BookingContex";
+import Footer from "./components/Footer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,6 +22,7 @@ root.render(
         <BookingContextProvider>
           <BrowserRouter>
             <App />
+            <Footer />
           </BrowserRouter>
         </BookingContextProvider>
       </SearchContextProvider>

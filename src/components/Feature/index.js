@@ -1,11 +1,4 @@
 import React, { useContext } from "react";
-import Jakarta from "../../assets/images/jakarta-display.jpg";
-import Bandung from "../../assets/images/bandung-display.jpg";
-import Surabaya from "../../assets/images/surabaya-display.jpg";
-import Bogor from "../../assets/images/bogor-display.jpg";
-import Semarang from "../../assets/images/semarang-display.jpg";
-import Yogyakarta from "../../assets/images/yogyakarta-display.jpg";
-import useFetch from "../../hooks/useFetch";
 import {
   FeatureContainer,
   FeatureImg,
@@ -18,11 +11,35 @@ import {
 import { Skeleton } from "@mui/material";
 import { SearchContext } from "../../context/SearchContext";
 import { Navigate } from "react-router-dom";
+import { GetCity, GetCityWithAllHotel } from "../../hooks/fetchApi";
 
 const Feature = () => {
   const { dispatch } = useContext(SearchContext);
 
-  const { data, loading } = useFetch("/api/v1/place/count");
+  // const { data, loading } = useFetch("/api/v1/place/count");
+  const { city, cityLoading, cityError } = GetCity();
+
+  console.log(city);
+
+  if (cityLoading) {
+    return (
+      <>
+        <Skeleton
+          sx={{ bgcolor: "grey.900" }}
+          variant="rectangular"
+          width={window.innerWidth < 480 ? 180 : 300}
+          height={window.innerHeight < 480 ? 240 : 380}
+        />
+        <Skeleton
+          sx={{ bgcolor: "grey.900" }}
+          variant="rectangular"
+          width={window.innerWidth < 480 ? 180 : 300}
+          height={window.innerHeight < 480 ? 240 : 380}
+        />
+      </>
+    );
+  }
+
   const handleClick = (city) => {
     console.log(city);
     // e.preventDefault();
@@ -36,7 +53,22 @@ const Feature = () => {
   return (
     <FeatureSec>
       <FeatureContainer>
-        {data.map((item) => (
+        {cityLoading && (
+          <>
+            {city?.map((item) => (
+              <div key={item.id}>
+                <Skeleton
+                  sx={{ bgcolor: "grey.900" }}
+                  variant="rectangular"
+                  width={window.innerWidth < 480 ? 180 : 300}
+                  height={window.innerHeight < 480 ? 240 : 380}
+                />
+              </div>
+            ))}
+          </>
+        )}
+
+        {city?.map((item) => (
           <div key={item._id}>
             <FeatureItems onClick={() => handleClick(item.city)}>
               <FeatureImg src={item.image} />
@@ -80,36 +112,3 @@ const Feature = () => {
 };
 
 export default Feature;
-
-// const dataFeature = [
-//   {
-//     id: 1,
-//     city: "Jakarta",
-//     img: Jakarta,
-//   },
-//   {
-//     id: 2,
-//     city: "bogor",
-//     img: Bogor,
-//   },
-//   {
-//     id: 3,
-//     city: "bandung",
-//     img: Bandung,
-//   },
-//   {
-//     id: 4,
-//     city: "Yogjakarta",
-//     img: Yogyakarta,
-//   },
-//   {
-//     id: 5,
-//     city: "surabaya",
-//     img: Surabaya,
-//   },
-//   {
-//     id: 6,
-//     city: "semarang",
-//     img: Semarang,
-//   },
-// ];

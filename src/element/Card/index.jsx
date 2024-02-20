@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Image,
+  Location,
   Price,
   SubTitle,
   Title,
@@ -9,17 +10,26 @@ import {
   WrappImage,
 } from "./Card";
 import { rupiah, rupiahId } from "../../utiltis/rupiahId";
+import { MdLocationPin } from "react-icons/md";
 
-const Card = ({ image, title, subtitle, price }) => {
+const Card = (props) => {
+  console.log(props);
   return (
     <Wrapp>
       <WrappImage>
-        <Image src={image} />
+        <Image src={props.image} />
       </WrappImage>
       <WrapDesc>
-        <Title>{title}</Title>
-        <SubTitle>{subtitle}</SubTitle>
-        <Price>{price ? rupiah(price) : ""}</Price>
+        <SubTitle>{props?.subTitle}</SubTitle>
+        <Title>{props?.title}</Title>
+        {props.location && (
+          <Location>
+            <MdLocationPin />
+            {props?.location}
+          </Location>
+        )}
+
+        <Price>{props.price ? rupiah(props.price) : ""}</Price>
       </WrapDesc>
     </Wrapp>
   );

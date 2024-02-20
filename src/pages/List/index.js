@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
@@ -35,15 +35,16 @@ import { combineStore } from "../../zustand/store.js";
 import { GetHotel } from "../../hooks/fetchApi.js";
 
 const List = () => {
-  console.log("first");
   const { hotel, addHotel } = combineStore();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("jakarta");
   const [openDate, setOpenDate] = useState("false");
   const location = useLocation();
-  const [date, setDate] = useState(location.state.date);
+  const [date, setDate] = useState();
   // const [option, setOption] = useState(location.state.option);
 
   const { hotels, hotelLoading, hotelError } = GetHotel();
+
+  console.log(hotels);
   useEffect(() => {
     if (hotels) {
       addHotel(hotels);
@@ -53,31 +54,21 @@ const List = () => {
   useEffect(() => {
     if (search) {
       const filter = hotels
-        .map((hotel) => hotel)
+        ?.map((hotel) => hotel)
         .filter((item) => item?.place?.city === search);
       addHotel(filter);
     }
   }, [search, hotels, addHotel]);
 
-  // const { data, loading, reFetch } = useFetch(
-  //   `/api/v1/hotel/all`
-  //   // &min=${min || 0}&max=${max || 10000000}`
-  // );
-
-  // const filter = hotels
-  //   ?.map((item) => item)
-  //   .filter((i) => i?.place?.city === "jakarta");
+  console.log(hotel);
 
   useEffect(() => {
     combineStore.persist.rehydrate();
   }, []);
 
-  console.log("test run");
-
   const handleClick = (item) => {
     setSearch(item);
   };
-  // const { option } = useContext(SearchContext);
 
   return (
     <ListSec>
@@ -181,17 +172,3 @@ const List = () => {
 };
 
 export default List;
-
-// @media screen and (max-width: 768px) {
-//   display: none;
-//   /* position: relative;
-//   flex-direction: column;
-//   height: 64vh;
-//   top: -160px;
-//   z-index: 999;
-//   border-top-left-radius: 40px 40px;
-//   border-top-right-radius: 40px 40px; */
-// }
-// @media screen and (max-width: 480px) {
-//   /* flex-direction: column; */
-// }

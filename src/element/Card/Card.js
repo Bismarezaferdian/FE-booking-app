@@ -47,12 +47,25 @@ export const Title = styled.p`
   font-weight: 700;
   line-height: 20px;
   text-transform: capitalize;
+  color: #0f0f00;
+  text-decoration: none;
 `;
 
 export const SubTitle = styled.p`
   font-size: 12px;
   text-transform: lowercase;
   color: gray;
+  text-decoration: none;
+`;
+
+export const Location = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  text-transform: lowercase;
+  color: gray;
+  text-decoration: none;
 `;
 
 export const Price = styled.p`
