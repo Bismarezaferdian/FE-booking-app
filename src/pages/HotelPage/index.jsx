@@ -27,7 +27,6 @@ import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Place from "../../parts/PlaceSlider";
 import { Box, Skeleton } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const Hotel = () => {
   const { hotels, hotelLoading, hotelError } = GetHotel(5);
@@ -94,7 +93,7 @@ const Hotel = () => {
                     </div>
                   ))}
             </Content>
-            <ButtonShowAll>Lihat semua</ButtonShowAll>
+            <ButtonShowAll to="/hotels">Lihat semua</ButtonShowAll>
           </WrappContent>
         </ContentContainer>
         {/* daerah */}
@@ -122,7 +121,7 @@ const Hotel = () => {
                     </div>
                   ))}
             </Content>
-            <ButtonShowAll>Lihat semua</ButtonShowAll>
+            <ButtonShowAll to="#">Lihat semua</ButtonShowAll>
           </WrappContent>
         </ContentContainer>
       </ContainerWrapp>

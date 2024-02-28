@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
+import { format, parse, parseISO } from "date-fns";
 import {
   HeaderHead,
   HeaderContainer,
@@ -37,11 +37,13 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { toast, ToastContainer } from "react-toastify";
+import { combineStore } from "../../zustand/store";
+import { dateId } from "../../utiltis/dateId";
 
 function Header({ type }) {
-  // const [destination, setDestinatio] = useState("destination");
-  const [destination, setDestination] = useState("");
+  const { addCity, dates, addDate, updateOption, option } = combineStore();
   const [open, setOpen] = useState(false);
+  const [openOption, setOpenOption] = useState(false);
   const [date, setDate] = useState([
     {
       startDate: new window.Date(),
@@ -50,59 +52,54 @@ function Header({ type }) {
     },
   ]);
 
-  const [openOption, setOpenOption] = useState(false);
-  const [option, setOption] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
+  // console.log(dateRange);
   var location = useLocation();
 
   const getNavLink = (path) => {
     return location.pathname === path ? "active" : undefined;
   };
 
+  // useEffect(() => {
+  //   setDateRange(dates);
+  // }, [dates]);
+
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
 
   const handleSubmit = () => {
-    if (destination === "") {
-      toast("Destination tidak boleh kosong");
-    } else {
-      dispatch({
-        type: "NEW_SEARCH",
-        payload: { destination, date, option },
-      });
-      navigate("/hotels", { state: { destination, date, option } });
-    }
+    // if (destination === "") {
+    //   toast("Destination tidak boleh kosong");
+    // } else {
+    //   dispatch({
+    //     type: "NEW_SEARCH",
+    //     payload: { destination, date, option },
+    //   });
+    //   navigate("/hotels", { state: { destination, date, option } });
+    // }
   };
 
-  const handleOption = (name, operation) => {
-    setOption((prev) => {
-      return {
-        ...prev,
-        [name]: operation === "i" ? option[name] - 1 : option[name] + 1,
-      };
-    });
+  const handleDestination = (e) => {
+    addCity(capitalizeFirstLetter(e.target.value));
   };
 
-  // const handleDestination = (e) => {
-  //   setDestination(e.target.value);
-  // };
-
-  // // useEffect(() => {
-  // //   handleDestination();
-  // // });
-
-  const lowerCase = (string) => {
-    // return string.charAt(0).toLowerCase() + string.slice(1);
-    return string.toLowerCase();
+  //update to store Zustand
+  const handleDate = (e) => {
+    setDate([e.selection]);
+    addDate([e.selection]);
   };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  useEffect(() => {
+    combineStore.persist.rehydrate();
+  }, []);
   return (
     <HeaderHead type={type}>
       <ToastContainer autoClose={5000} />
       <HeaderContainer type={type}>
-        <HeaderList>
+        {/* <HeaderList>
           <HeaderItem active={getNavLink("/")} to="/">
             <Bed />
             <Span>stays</Span>
@@ -128,7 +125,7 @@ function Header({ type }) {
             <Train />
             <Span>Train</Span>
           </HeaderItem>
-        </HeaderList>
+        </HeaderList> */}
         {type !== "list" && (
           <>
             <HeadTitle> A lifetime of discounts? It's Genius.</HeadTitle>
@@ -143,7 +140,8 @@ function Header({ type }) {
                 <Bed />
                 <Input
                   onChange={
-                    (e) => setDestination(lowerCase(e.target.value))
+                    handleDestination
+                    // (e) => setDestination(lowerCase(e.target.value))
                     // setDestination(capitalizeFirstLetter(e.target.value))
                   }
                   required
@@ -151,17 +149,18 @@ function Header({ type }) {
               </HeaderSearchItems>
               <HeaderSearchItems>
                 <Date />
-                <Span onClick={() => setOpen(!open)}>{`${format(
-                  date[0].startDate,
-                  "dd/MM/yyyy"
-                )} to ${format(date[0].endDate, "dd/MM/yyyy")} `}</Span>
+                <Span onClick={() => setOpen(!open)}>{`${dateId(
+                  dates[0].startDate
+                )} to ${dateId(dates[0].endDate)} `}</Span>
                 {open && (
                   <DateWrapp>
                     <DateRange
                       editableDateInputs={true}
-                      onChange={(item) => setDate([item.selection])}
+                      onChange={(e) => handleDate(e)}
+                      // onChange={(item) => setDate([item.selection])}
                       moveRangeOnFirstSelection={false}
                       minDate={new window.Date()}
+                      // ranges={dates}
                       ranges={date}
                     />
                     <DateBtn onClick={() => setOpen(!open)}>submit</DateBtn>
@@ -186,13 +185,13 @@ function Header({ type }) {
                       <OptionBtnWrapp>
                         <OptionCounterBtn
                           disabled={option.adult <= 1}
-                          onClick={() => handleOption("adult", "i")}
+                          onClick={() => updateOption("adult", "i")}
                         >
                           <Minus />
                         </OptionCounterBtn>
                         <OptionCounter>{option.adult}</OptionCounter>
                         <OptionCounterBtn
-                          onClick={() => handleOption("adult", "d")}
+                          onClick={() => updateOption("adult", "d")}
                         >
                           <Plus />
                         </OptionCounterBtn>
@@ -204,13 +203,13 @@ function Header({ type }) {
                       <OptionBtnWrapp>
                         <OptionCounterBtn
                           disabled={option.room <= 1}
-                          onClick={() => handleOption("room", "i")}
+                          onClick={() => updateOption("room", "i")}
                         >
                           <Minus />
                         </OptionCounterBtn>
                         <OptionCounter>{option.room}</OptionCounter>
                         <OptionCounterBtn
-                          onClick={() => handleOption("room", "d")}
+                          onClick={() => updateOption("room", "d")}
                         >
                           <Plus />
                         </OptionCounterBtn>
@@ -221,13 +220,13 @@ function Header({ type }) {
                       <OptionBtnWrapp>
                         <OptionCounterBtn
                           disabled={option.children <= 0}
-                          onClick={() => handleOption("children", "i")}
+                          onClick={() => updateOption("children", "i")}
                         >
                           <Minus />
                         </OptionCounterBtn>
                         <OptionCounter>{option.children}</OptionCounter>
                         <OptionCounterBtn
-                          onClick={() => handleOption("children", "d")}
+                          onClick={() => updateOption("children", "d")}
                         >
                           <Plus />
                         </OptionCounterBtn>

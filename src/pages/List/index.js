@@ -21,6 +21,7 @@ import {
   ListTitle,
   ListWrapp,
   Location,
+  PropertiWrapp,
   SpanDate,
   WrappSkeleton,
 } from "./ListStyle";
@@ -33,14 +34,22 @@ import { Skeleton } from "@mui/material";
 import PropertyPart from "../../components/PropertyPart/index.js";
 import { combineStore } from "../../zustand/store.js";
 import { GetHotel } from "../../hooks/fetchApi.js";
+import { dateId } from "../../utiltis/dateId.js";
 
 const List = () => {
   const { hotel, addHotel } = combineStore();
   const [search, setSearch] = useState("jakarta");
   const [openDate, setOpenDate] = useState("false");
   const location = useLocation();
-  const [date, setDate] = useState();
+  const { option, dates, addDate } = combineStore();
   // const [option, setOption] = useState(location.state.option);
+  const [date, setDate] = useState([
+    {
+      startDate: new window.Date(),
+      endDate: new window.Date(),
+      key: "selection",
+    },
+  ]);
 
   const { hotels, hotelLoading, hotelError } = GetHotel();
 
@@ -70,6 +79,12 @@ const List = () => {
     setSearch(item);
   };
 
+  //update to store Zustand
+  const handleDate = (e) => {
+    setDate([e.selection]);
+    addDate([e.selection]);
+  };
+
   return (
     <ListSec>
       <Navbar />
@@ -87,14 +102,14 @@ const List = () => {
               />
               <Location />
             </ListItem>
-            {/* <ListItem>
+            <ListItem>
               <ListLabel>check-in date</ListLabel>
               <SpanDate>
                 {" "}
                 <Date />
                 <ListDate onClick={() => setOpenDate(!openDate)}>
-                  {`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(
-                    date[0].endDate,
+                  {`${dateId(dates[0].startDate, "dd/MM/yyyy")} to ${dateId(
+                    dates[0].endDate,
                     "dd/MM/yyyy"
                   )} `}
                 </ListDate>
@@ -103,35 +118,35 @@ const List = () => {
               {!openDate && (
                 <ListDateWrapp>
                   <DateRange
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(e) => handleDate(e)}
                     moveRangeOnFirstSelection={false}
                     minDate={new window.Date()}
                     ranges={date}
                   />
                 </ListDateWrapp>
               )}
-            </ListItem> */}
+            </ListItem>
             <ListItem>
               <ListTitle>Option</ListTitle>
-              <ListOption>
+              {/* <ListOption>
                 <ListLabelOption>Min Price per night</ListLabelOption>
-                {/* <ListOptionInput onChange={(e) => setMin(e.target.value)} /> */}
+                <ListOptionInput onChange={(e) => setMin(e.target.value)} />
               </ListOption>
               <ListOption>
                 <ListLabelOption>Max Price per night</ListLabelOption>
-                {/* <ListOptionInput onChange={(e) => setMax(e.target.value)} /> */}
-              </ListOption>
+                <ListOptionInput onChange={(e) => setMax(e.target.value)} />
+              </ListOption> */}
               <ListOption>
                 <ListLabelOption>adult</ListLabelOption>
-                {/* <ListOptionInput min={1} placeholder={option.adult} /> */}
+                <ListOptionInput min={1} placeholder={option.adult} />
               </ListOption>
               <ListOption>
                 <ListLabelOption>room</ListLabelOption>
-                {/* <ListOptionInput min={1} placeholder={option.room} /> */}
+                <ListOptionInput min={1} placeholder={option.room} />
               </ListOption>
               <ListOption>
                 <ListLabelOption>children</ListLabelOption>
-                {/* <ListOptionInput min={0} placeholder={option.children} /> */}
+                <ListOptionInput min={0} placeholder={option.children} />
               </ListOption>
               <BtnWrapp>
                 <BtnListSeacrh onClick={handleClick}>Search</BtnListSeacrh>
@@ -164,9 +179,10 @@ const List = () => {
           </ListResult>
         </ListWrapp>
       </ListContainer>
-      <PropertyPart />
+      <PropertiWrapp>
+        <PropertyPart />
+      </PropertiWrapp>
       <Mail />
-      <Footer />
     </ListSec>
   );
 };

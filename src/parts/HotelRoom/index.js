@@ -19,22 +19,31 @@ import {
   CardRoom,
   Content,
   ContentRoomWrap,
+  IconRoom,
+  IconRoomWrapp,
+  ImageDetail,
+  ImageRoomWrapp,
   InputNumb,
   Label,
+  PriceDescWrapp,
   RoomContainer,
   RoomContentWrap,
   RoomDesc,
   RoomFasilitas,
   RoomH1,
   RoomTitle,
+  SubContent,
   WrapDesc,
 } from "./HotelRoomStyle";
+import zIndex from "@mui/material/styles/zIndex";
+import { combineStore } from "../../zustand/store";
 
 const HotelRoom = ({ id, hotel }) => {
   // console.log(hotel);
   const [selectedRoom, setSelectedRoom] = useState([]);
   const { data, loading } = useFetch(`/api/v1/hotel/room/${id}`);
 
+  const { dates } = combineStore();
   const { date } = useContext(SearchContext);
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -50,7 +59,8 @@ const HotelRoom = ({ id, hotel }) => {
     return dates;
   };
 
-  const alldates = getDatesInRange(date[0].startDate, date[0].endDate);
+  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+  console.log(alldates);
 
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
@@ -102,7 +112,7 @@ const HotelRoom = ({ id, hotel }) => {
   return (
     <RoomContainer id="reservasi">
       <ToastContainer autoClose={3000} />
-      <RoomTitle>Check Aviable Rooms</RoomTitle>
+      <RoomTitle>Select Rooms</RoomTitle>
       {loading ? (
         <Skeleton
           sx={{ bgcolor: "grey" }}
@@ -114,27 +124,44 @@ const HotelRoom = ({ id, hotel }) => {
         <RoomContentWrap>
           {data.map((room, i) => (
             <CardRoom key={i}>
+              <ImageRoomWrapp>
+                {room.image?.map((item, i) => (
+                  <div key={i}>
+                    <ImageDetail src={item} />
+                  </div>
+                ))}
+              </ImageRoomWrapp>
               <ContentRoomWrap>
                 <RoomH1>{room.title}</RoomH1>
-                <IconWrapp>
-                  <div>
-                    <Bed /> <WrapDesc>Double Bed</WrapDesc>
-                  </div>
-                  <div>
-                    <Wifi />
-                    <WrapDesc>Wifi</WrapDesc>
-                  </div>
-                  <div>
-                    <Tv />
-                    <WrapDesc>Tv</WrapDesc>
-                  </div>
-                  <div>
-                    <Bath />
-                    <WrapDesc>bathroom</WrapDesc>
-                  </div>
-                </IconWrapp>
+                <SubContent>
+                  <IconRoomWrapp>
+                    <IconRoom>
+                      <Bed /> <WrapDesc>Double Bed</WrapDesc>
+                    </IconRoom>
+                    <IconRoom>
+                      <Wifi />
+                      <WrapDesc>Wifi</WrapDesc>
+                    </IconRoom>
+                    <IconRoom>
+                      <Tv />
+                      <WrapDesc>Tv</WrapDesc>
+                    </IconRoom>
+                    <IconRoom>
+                      <Bath />
+                      <WrapDesc>bathroom</WrapDesc>
+                    </IconRoom>
+                  </IconRoomWrapp>
+                  <PriceDescWrapp>
+                    <HotelPrice>idr {rupiah(room.price)}</HotelPrice>
+                    <HotelPerNight>1 night 1 room</HotelPerNight>
+                    <HotelDescCancel>free cancelation</HotelDescCancel>
+                    <ButtonRoom onClick={handleClick}>
+                      Reservation Now
+                    </ButtonRoom>
+                  </PriceDescWrapp>
+                </SubContent>
                 <Content>
-                  <div>
+                  {/* <div>
                     <RoomDesc>{room.desc}</RoomDesc>
 
                     <RoomFasilitas>
@@ -150,15 +177,7 @@ const HotelRoom = ({ id, hotel }) => {
                         </div>
                       ))}
                     </RoomFasilitas>
-                  </div>
-                  <div style={{ textAlign: "right", marginRight: "20px" }}>
-                    <HotelPrice>idr {rupiah(room.price)}</HotelPrice>
-                    <HotelPerNight>1 night 1 room</HotelPerNight>
-                    <HotelDescCancel>free cancelation</HotelDescCancel>
-                    <ButtonRoom onClick={handleClick}>
-                      Reservation Now
-                    </ButtonRoom>
-                  </div>
+                  </div> */}
                 </Content>
               </ContentRoomWrap>
             </CardRoom>

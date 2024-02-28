@@ -38,7 +38,7 @@ function Footer() {
         </FooterList>
       </FooterContainer>
       <FooterTitle>
-        <CopyRight /> 2022 Bisma Reza Ferdian
+        <CopyRight /> 2024 Bisma Reza Ferdian
       </FooterTitle>
     </FooterSec>
   );

@@ -19,8 +19,6 @@ const Feature = () => {
   // const { data, loading } = useFetch("/api/v1/place/count");
   const { city, cityLoading, cityError } = GetCity();
 
-  console.log(city);
-
   if (cityLoading) {
     return (
       <>
@@ -41,7 +39,6 @@ const Feature = () => {
   }
 
   const handleClick = (city) => {
-    console.log(city);
     // e.preventDefault();
     dispatch({
       type: "NEW_SEARCH",

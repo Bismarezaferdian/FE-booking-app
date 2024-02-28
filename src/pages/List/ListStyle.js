@@ -98,6 +98,7 @@ export const ListResult = styled.div`
   flex: 3;
   display: flex;
   flex-direction: column;
+  background-color: "blue";
   gap: 20px;
 `;
 
@@ -146,4 +147,9 @@ export const BtnListSeacrh = styled.button`
     background: #1363df;
     transition: 0.2s all ease;
   }
+`;
+
+export const PropertiWrapp = styled.div`
+  display: flex;
+  justify-content: center;
 `;

@@ -57,8 +57,12 @@ export const Logo = styled(LinkR)`
 
 export const NavItems = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
 `;
+
+export const NavMenu = styled(LinkR)``;
 
 export const NavButton = styled(LinkR)`
   /* padding: 5px 10px; */

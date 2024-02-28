@@ -18,11 +18,15 @@ export const WrappContent = styled.div`
   padding: 24px 0;
 `;
 
-export const ButtonShowAll = styled.button`
+export const ButtonShowAll = styled(LinkR)`
   /* max-width: max-content; */
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
   width: 20%;
   padding: 14px 0;
   justify-self: center;
+  align-items: center;
   margin: 28px 0;
   border: none;
   background-color: #c8e2ff;

@@ -31,6 +31,7 @@ export const RoomContentWrap = styled.div`
 
 export const CardRoom = styled.div`
   /* border: 1px solid gray; */
+  display: flex;
   background: #ffff;
   border-radius: 8px;
   display: flex;
@@ -41,6 +42,19 @@ export const CardRoom = styled.div`
   align-items: center;
   /* padding: 20px 0 20px 20px; */
   align-items: center;
+`;
+export const ImageRoomWrapp = styled.div`
+  width: 300px;
+  height: 200px;
+  /* background-color: red; */
+  overflow: hidden;
+`;
+
+export const ImageDetail = styled.img`
+  width: 100%;
+  height: 200px;
+  /* height: 100%; */
+  object-fit: cover;
 `;
 
 export const CardImgWrap = styled.div`
@@ -82,6 +96,26 @@ export const ContentRoomWrap = styled.div`
   margin-left: 20px;
   width: 100%;
   height: 100%;
+`;
+
+export const SubContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const IconRoom = styled.div`
+  display: flex;
+  padding: 8px 0;
+  gap: 4px;
+`;
+
+export const IconRoomWrapp = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PriceDescWrapp = styled.div`
+  text-align: right;
 `;
 
 export const Content = styled.div`

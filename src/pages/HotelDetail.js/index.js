@@ -18,23 +18,23 @@ const Hotel = () => {
 
   // console.log(data);
 
-  const Image = [
-    {
-      src: require("../../assets/images/hotel-detail.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail2.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail3.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail4.jpg"),
-    },
-    {
-      src: require("../../assets/images/hotel-detail5.jpg"),
-    },
-  ];
+  // const Image = [
+  //   {
+  //     src: require("../../assets/images/hotel-detail.jpg"),
+  //   },
+  //   {
+  //     src: require("../../assets/images/hotel-detail2.jpg"),
+  //   },
+  //   {
+  //     src: require("../../assets/images/hotel-detail3.jpg"),
+  //   },
+  //   {
+  //     src: require("../../assets/images/hotel-detail4.jpg"),
+  //   },
+  //   {
+  //     src: require("../../assets/images/hotel-detail5.jpg"),
+  //   },
+  // ];
   return (
     <div>
       <Navbar />
@@ -46,7 +46,6 @@ const Hotel = () => {
         <PropertyPart />
         <Mail />
       </HotelContent>
-      <Footer />
     </div>
   );
 };
