@@ -17,6 +17,7 @@ import { BookingContext } from "../../context/BookingContex";
 import { dateId } from "../../utiltis/dateId";
 import axios from "axios";
 import Completed from "../../parts/Completed";
+import { combineStore } from "../../zustand/store";
 
 const steps = ["Booking Information", "Payment", "Completed"];
 
@@ -42,9 +43,10 @@ export default function Steper() {
   // });
   // const [data, setData] = useState();
   const [setData] = useState();
-  const { date } = useContext(SearchContext);
-  const startDate = dateId(date[0].startDate);
-  const endDate = dateId(date[0].endDate);
+  const { dates } = combineStore();
+  // const { date } = useContext(SearchContext);
+  const startDate = dateId(dates[0].startDate);
+  const endDate = dateId(dates[0].endDate);
 
   const payload = {
     firstName: booking.firstName,
@@ -145,7 +147,7 @@ export default function Steper() {
             )}
             {activeStep === 1 && (
               <Payment
-                date={date}
+                date={dates}
                 payment={payment}
                 handleNext={handleNext}
                 activeStep={activeStep}

@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 
 export const PropertySec = styled.div`
-  /* display: flex; */
+  display: flex;
   justify-content: center;
+`;
+
+export const PropertyWrapp = styled.div`
+  max-width: 1024px;
 `;
 
 export const PropertyHeadTitle = styled.h1`
@@ -14,20 +18,15 @@ export const PropertyHeadTitle = styled.h1`
 `;
 
 export const PartContainer = styled.div`
-  /* margin-top: 40px; */
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  max-width: 1024px;
-  padding: 0 12px 0 12px;
-  /* gap: 20px; */
 `;
 
 export const PartItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* border-radius: 20px; */
   position: relative;
   flex: 1;
   overflow: hidden;
@@ -38,7 +37,6 @@ export const PartImg = styled.img`
   height: 100%;
   max-width: 526px;
   object-fit: cover;
-  /* border: 1px solid gray; */
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
   &:hover {

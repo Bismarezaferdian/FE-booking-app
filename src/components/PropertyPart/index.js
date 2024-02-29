@@ -18,6 +18,7 @@ import {
   PartTitleWrapp,
   PropertyHeadTitle,
   PropertySec,
+  PropertyWrapp,
   Rating,
   RatingWrapp,
 } from "./PartStyle";
@@ -55,10 +56,11 @@ const PropertyPart = () => {
   };
   return (
     <PropertySec>
-      <PropertyHeadTitle>Home Gues Loved</PropertyHeadTitle>
+      <PropertyWrapp>
+        <PropertyHeadTitle>Home Gues Loved</PropertyHeadTitle>
 
-      <PartContainer>
-        <>
+        <PartContainer>
+          {/* <> */}
           <Swiper
             slidesPerView={views.innerWidth <= 768 ? 2 : 4}
             spaceBetween={30}
@@ -113,8 +115,9 @@ const PropertyPart = () => {
                 </SwiperSlide>
               ))}
           </Swiper>
-        </>
-      </PartContainer>
+          {/* </> */}
+        </PartContainer>
+      </PropertyWrapp>
     </PropertySec>
   );
 };

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const HomeCountainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: start;
   gap: 30px;

@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Mail from "../../components/Mail.js";
 import Navbar from "../../components/Navbar";
@@ -41,7 +40,7 @@ const Hotel = () => {
       <Header type="list" />
       <HotelContent>
         <HotelImage data={data.photo} />
-        <HotelDesc Image={Image} data={data} id={id} />
+        <HotelDesc data={data} id={id} />
         <TitleDetail>Other Hotel</TitleDetail>
         <PropertyPart />
         <Mail />

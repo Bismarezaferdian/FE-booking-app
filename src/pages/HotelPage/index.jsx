@@ -27,6 +27,8 @@ import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Place from "../../parts/PlaceSlider";
 import { Box, Skeleton } from "@mui/material";
+import PropertyPart from "../../components/PropertyPart";
+import Mail from "../../components/Mail.js";
 
 const Hotel = () => {
   const { hotels, hotelLoading, hotelError } = GetHotel(5);
@@ -124,6 +126,7 @@ const Hotel = () => {
             <ButtonShowAll to="#">Lihat semua</ButtonShowAll>
           </WrappContent>
         </ContentContainer>
+        <Mail />
       </ContainerWrapp>
     </>
   );

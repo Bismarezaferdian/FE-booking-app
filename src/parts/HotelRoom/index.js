@@ -35,13 +35,15 @@ import {
   SubContent,
   WrapDesc,
 } from "./HotelRoomStyle";
-import zIndex from "@mui/material/styles/zIndex";
 import { combineStore } from "../../zustand/store";
 
 const HotelRoom = ({ id, hotel }) => {
+  console.log(hotel);
   // console.log(hotel);
-  const [selectedRoom, setSelectedRoom] = useState([]);
+  // const [selectedRoom, setSelectedRoom] = useState([]);
   const { data, loading } = useFetch(`/api/v1/hotel/room/${id}`);
+
+  console.log(data);
 
   const { dates } = combineStore();
   const { date } = useContext(SearchContext);
@@ -60,46 +62,28 @@ const HotelRoom = ({ id, hotel }) => {
   };
 
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-  console.log(alldates);
 
-  const isAvailable = (roomNumber) => {
-    const isFound = roomNumber.unavailableDates.some((date) =>
-      alldates.includes(new Date(date).getTime())
-    );
-    return !isFound;
-  };
+  // const isAvailable = (roomNumber) => {
+  //   const isFound = roomNumber.unavailableDates.some((date) =>
+  //     alldates.includes(new Date(date).getTime())
+  //   );
+  //   return !isFound;
+  // };
 
   const navigate = useNavigate();
 
-  const handleSelected = (e) => {
-    const checked = e.target.checked;
-    const value = e.target.value;
-    setSelectedRoom(
-      checked
-        ? [...selectedRoom, value]
-        : selectedRoom.filter((item) => item !== value)
-    );
-  };
+  // const handleSelected = (e) => {
+  //   const checked = e.target.checked;
+  //   const value = e.target.value;
+  //   setSelectedRoom(
+  //     checked
+  //       ? [...selectedRoom, value]
+  //       : selectedRoom.filter((item) => item !== value)
+  //   );
+  // };
 
   const handleClick = async () => {
-    try {
-      if (selectedRoom.length <= 0) {
-        toast("please selected your room !", { autoClose: 3000 });
-      } else {
-        await Promise.all(
-          selectedRoom.map((roomId) => {
-            return axios.put(
-              `${process.env.REACT_APP_HOST}/api/v1/room/availability/${roomId}`,
-              {
-                dates: alldates,
-              }
-            );
-            // return res.data;
-          })
-        );
-        navigate("/steper", { state: { hotel, data } });
-      }
-    } catch (error) {}
+    navigate("/steper", { state: { hotel, data } });
   };
 
   const rupiah = (number) => {
@@ -160,8 +144,8 @@ const HotelRoom = ({ id, hotel }) => {
                     </ButtonRoom>
                   </PriceDescWrapp>
                 </SubContent>
-                <Content>
-                  {/* <div>
+                {/* <Content> */}
+                {/* <div>
                     <RoomDesc>{room.desc}</RoomDesc>
 
                     <RoomFasilitas>
@@ -178,7 +162,7 @@ const HotelRoom = ({ id, hotel }) => {
                       ))}
                     </RoomFasilitas>
                   </div> */}
-                </Content>
+                {/* </Content> */}
               </ContentRoomWrap>
             </CardRoom>
           ))}
