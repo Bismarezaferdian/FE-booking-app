@@ -6,23 +6,30 @@ import Header from "../../components/Header";
 import Mail from "../../components/Mail.js";
 import Navbar from "../../components/Navbar";
 import PropertyList from "../../components/PropertyList";
-import PropertyPart from "../../components/PropertyPart";
 import { AuthContext } from "../../context/AuthContex";
 import { HomeCountainer, HomeTitle } from "./HomeStyle";
 import useFetch from "../../hooks/useFetch.js";
-import { GetHotel } from "../../hooks/fetchApi.js";
+import { GetHotel, GetProperties, GetMostHotel } from "../../hooks/fetchApi.js";
+import MostHotel from "../../components/MostHotel/index.js";
 
 const Home = () => {
   const { hotels, loading, error } = GetHotel();
 
+  const { properties, propertiesLoading, propertiesError } = GetProperties();
+  const { mostHotel, mostHotelLoading, mostHotelError } = GetMostHotel();
+
+  // console.log(mostHotelLoading);
+  // console.log(mostHotel);
   return (
     <>
       <Navbar />
       <Header />
       <HomeCountainer>
         <Feature />
-        <PropertyList />
-        <PropertyPart />
+        <PropertyList data={properties} loading={propertiesLoading} />
+        <MostHotel data={mostHotel} loading={mostHotelLoading} />
+        {/* <PropertyList data={mostHotel} loading={mostHotelLoading} /> */}
+        {/* <PropertyPart /> */}
       </HomeCountainer>
       <Mail />
     </>

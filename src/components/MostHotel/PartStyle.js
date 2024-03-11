@@ -18,24 +18,30 @@ export const PropertyHeadTitle = styled.h1`
 `;
 
 export const PartContainer = styled.div`
-  width: 100%;
+  justify-content: center;
   display: flex;
-  justify-content: space-between;
+
+  gap: 20px;
+  padding: 0 12px 0 12px;
+  width: 100vw;
+  max-width: 1024px;
+  overflow: hidden;
 `;
 
 export const PartItems = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: flex-start;
   position: relative;
-  flex: 1;
+  flex: 1; */
   overflow: hidden;
 `;
 
 export const PartImg = styled.img`
   width: 100%;
-  height: 100%;
-  max-width: 526px;
+  height: 120px;
+  object-fit: cover;
+  /* max-width: 526px; */
   object-fit: cover;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;

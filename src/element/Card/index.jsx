@@ -19,19 +19,34 @@ const Card = (props) => {
       <WrappImage>
         <Image src={props.image} />
       </WrappImage>
-      <WrapDesc>
-        <SubTitle>{props?.subTitle}</SubTitle>
-        <Title>{props?.title}</Title>
-        {props.location && (
-          <Location>
-            <MdLocationPin />
-            {props?.location}
-          </Location>
-        )}
+      <SubTitle>{props?.subTitle}</SubTitle>
+      <Title>{props?.title.slice(0, 10) + "..."}</Title>
+      {props.location && (
+        <Location>
+          <MdLocationPin />
+          {props?.location}
+        </Location>
+      )}
 
-        <Price>{props.price ? rupiah(props.price) : ""}</Price>
-      </WrapDesc>
+      <Price>{props.price ? rupiah(props.price) : ""}</Price>
     </Wrapp>
+    // <Wrapp>
+    //   <WrappImage>
+    //     <Image src={props.image} />
+    //   </WrappImage>
+    //   <WrapDesc>
+    //     <SubTitle>{props?.subTitle}</SubTitle>
+    //     <Title>{props?.title.slice(0, 10) + "..."}</Title>
+    //     {props.location && (
+    //       <Location>
+    //         <MdLocationPin />
+    //         {props?.location}
+    //       </Location>
+    //     )}
+
+    //     <Price>{props.price ? rupiah(props.price) : ""}</Price>
+    //   </WrapDesc>
+    // </Wrapp>
   );
 };
 

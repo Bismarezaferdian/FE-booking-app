@@ -3,23 +3,18 @@ import styled from "styled-components";
 export const Wrapp = styled.div`
   /* position: relative; */
   display: flex;
+  justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 8px;
-
-  max-width: 300px;
-  max-height: 300px;
-  box-shadow: 1px 3px 16px 2px rgba(207, 207, 207, 1);
+  text-decoration: none;
+  overflow: hidden;
 `;
 
 export const WrappImage = styled.div`
   display: flex;
-  /* flex: 1; */
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
-  /* max-width: 300px;
-  max-height: 300px; */
+  position: relative;
+  background-color: red;
 `;
 
 export const Image = styled.img`
@@ -28,18 +23,10 @@ export const Image = styled.img`
   aspect-ratio: 3/4;
   object-fit: cover;
   transition: 0.4s ease-in-out;
+  overflow: hidden;
   &:hover {
     scale: 1.1;
   }
-`;
-
-export const WrapDesc = styled.div`
-  display: flex;
-  padding: 12px 4px;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  min-height: 100px;
 `;
 
 export const Title = styled.p`
@@ -49,9 +36,14 @@ export const Title = styled.p`
   text-transform: capitalize;
   color: #0f0f00;
   text-decoration: none;
+  @media (max-width: 640px) {
+    font-size: 12px;
+    line-height: inherit;
+  }
 `;
 
 export const SubTitle = styled.p`
+  margin-top: 12px;
   font-size: 12px;
   text-transform: lowercase;
   color: gray;

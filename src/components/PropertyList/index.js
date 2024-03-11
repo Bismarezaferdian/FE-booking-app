@@ -21,9 +21,8 @@ import {
 } from "./PropertyStyle";
 import { Skeleton } from "@mui/material";
 
-function PropertyList() {
+function PropertyList(props) {
   const [views, setView] = useState(getWindowSize());
-  const { data, loading } = useFetch("/api/v1/properties/count");
 
   function getWindowSize() {
     const { innerWidth } = window;
@@ -42,24 +41,21 @@ function PropertyList() {
     };
   }, []);
 
-  // const view = window.screen.width;
-  // console.log(views.innerWidth);
-  // const Image = [Hotel1, Hotel2, Villa, Villa2, Villa3];
   return (
     <PropertySec>
       <PropertyHeadTitle>Browse by property type</PropertyHeadTitle>
       <PropertyContainer>
         <>
           <Swiper
-            slidesPerView={views.innerWidth <= 768 ? 3 : 5}
+            slidesPerView={views.innerWidth <= 768 ? 2.5 : 5}
             spaceBetween={30}
             draggable={true}
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {data.map((item, i) => (
+            {props.data?.map((item, i) => (
               <SwiperSlide key={i}>
-                {loading ? (
+                {props.loading ? (
                   <>
                     <Skeleton variant="rectangular" width={160} height={118} />
                     <Skeleton width="60%" />

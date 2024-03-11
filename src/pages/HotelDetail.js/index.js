@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../components/Header";
 import Mail from "../../components/Mail.js";
 import Navbar from "../../components/Navbar";
-import PropertyPart from "../../components/PropertyPart";
+import PropertyPart from "../../components/MostHotel/index.js";
 import HotelDesc from "../../parts/HotelDesc";
 import HotelImage from "../../parts/HotelImage";
 import { useLocation } from "react-router-dom";

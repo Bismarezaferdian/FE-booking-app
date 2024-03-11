@@ -14,9 +14,8 @@ export const PropertyHeadTitle = styled.h1`
 export const PropertyContainer = styled.div`
   /* display: grid; */
   /* grid-template-columns: repeat(5, 1fr); */
+  display: flex;
   justify-content: center;
-  /* display: flex; */
-
   gap: 20px;
   padding: 0 12px 0 12px;
   width: 100vw;
@@ -31,7 +30,7 @@ export const WrappSkeleton = styled.div`
 
 export const PropertyImg = styled.img`
   width: 100%;
-  height: 140px;
+  height: 120px;
   object-fit: cover;
   /* -webkit-transition: 0.4s ease;
   transition: 0.4s ease; */

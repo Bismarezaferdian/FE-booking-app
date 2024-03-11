@@ -73,7 +73,19 @@ export const GetProperties = () => {
     data: properties,
     isLoading: propertiesLoading,
     error: propertiesError,
-  } = useSWR(`${process.env.REACT_APP_HOST}/api/v1/properties`, fecther);
+  } = useSWR(`${process.env.REACT_APP_HOST}/api/v1/properties/count`, fecther);
 
   return { properties, propertiesLoading, propertiesError };
+};
+
+export const GetMostHotel = () => {
+  const {
+    data: mostHotel,
+    isLoading: mostHotelLoading,
+    error: mostHotelError,
+  } = useSWR(
+    `${process.env.REACT_APP_HOST}/api/v1/hotel/all?feature=true&limit=4`,
+    fecther
+  );
+  return { mostHotel, mostHotelLoading, mostHotelError };
 };

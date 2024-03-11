@@ -24,20 +24,14 @@ export const HotelCard = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid gray;
-  /* border: none; */
-  /* margin: 30px 10px; */
   margin: 15px 0;
   gap: 10px;
   width: 100%;
   border-radius: 4px;
-  /* justify-content: center; */
-  /* align-items: center; */
 
   &:nth-child(1) {
     margin-top: 0px;
   }
-  /* background: #e0e0e0;
-  box-shadow: -31px -31px 61px #bebebe, 31px 31px 61px #ffffff; */
 `;
 
 export const HotelDescWrapp = styled.div`
@@ -52,22 +46,16 @@ export const HotelDescWrapp = styled.div`
 `;
 
 export const HotelImgWrapp = styled.div`
-  /* padding: 10px; */
   width: 240px;
   min-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 4px;
-  /* overflow: hidden; */
-
-  /* max-width: 300px; */
-  /* max-height: 300px; */
   padding: 8px;
   @media screen and (max-width: 768px) {
-    /* margin: 10px; */
     min-height: 180px;
-    width: 120px;
+    width: 280px;
   }
   @media screen and (max-width: 480px) {
     min-height: 100px;
@@ -77,30 +65,23 @@ export const HotelImgWrapp = styled.div`
 `;
 
 export const HotelImg = styled.img`
-  /* width: 300px;
-  height: 200px; */
-  /* background: green; */
-  /* background: red; */
-  /* z-index: 999; */
   width: 240px;
-  /* height: 184px; */
-  min-height: 300px;
+  min-height: 280px;
   object-fit: cover;
-  border: 1px solid gray;
   @media screen and (max-width: 768px) {
-    height: 160px;
+    height: 180px;
     width: 120px;
+    background-color: green;
   }
   @media screen and (max-width: 480px) {
     min-height: 100px;
     width: 120px;
+    background-color: red;
   }
 `;
 
 export const HotelTitleWrapp = styled.div`
-  /* margin: 30px 0 10px 0; */
   @media screen and (max-width: 768px) {
-    /* margin: 10px; */
   }
   @media screen and (max-width: 480px) {
   }
@@ -130,10 +111,7 @@ export const HotelDetailContent = styled.div`
   position: relative;
 `;
 
-export const HotelDesc = styled.div`
-  /* padding: 20px; */
-  /* padding: 0; */
-`;
+export const HotelDesc = styled.div``;
 
 export const HotelLocation = styled.p`
   margin-bottom: 12px;
@@ -198,7 +176,6 @@ export const HotelFeatureDesc = styled.div`
 
 export const SpanDesc = styled.span`
   margin: 0 4px 0 4px;
-  /* opacity: 0.6; */
   font-size: 14px;
   color: #06623b;
   gap: 8px;
@@ -228,8 +205,6 @@ export const HotelFeatureIcon = styled.div`
 `;
 
 export const HotelPriceWrapp = styled.div`
-  /* position: absolute; */
-  /* transform: translate(340px, 50px); */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -246,8 +221,6 @@ export const HotelPriceWrapp = styled.div`
     align-items: flex-start;
     transform: none;
     margin-top: 8px;
-    /* margin-top: 10px; */
-    /* transform: translate(30%, -10%); */
   }
 `;
 

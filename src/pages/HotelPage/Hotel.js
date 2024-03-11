@@ -3,35 +3,49 @@ import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 
 export const ContentContainer = styled.div`
-  /* display: flex; */
-  display: grid;
+  /* display: grid;
   row-gap: 12px;
-  width: 1280px;
-  /* grid-row: auto; */
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
+  max-width: 1280px;
+  margin-bottom: 20px; */
+  /* 2nd */
+  display: grid;
+  justify-content: center;
+  padding: 20px 0;
 `;
 
 export const WrappContent = styled.div`
-  display: grid;
-  grid-auto-flow: row;
-  padding: 24px 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10px;
+  text-decoration: none;
+  margin: 20px 0 20px 0;
+  max-width: 100vw;
+  overflow: hidden;
 `;
 
 export const ButtonShowAll = styled(LinkR)`
-  /* max-width: max-content; */
   display: flex;
   justify-content: center;
-  text-decoration: none;
-  width: 20%;
-  padding: 14px 0;
   justify-self: center;
+  text-decoration: none;
+  width: max-content;
+  padding: 10px 24px;
+  margin-top: 12px;
   align-items: center;
-  margin: 28px 0;
+  border-radius: 8px;
+  /* margin: 28px 0; */
   border: none;
   background-color: #c8e2ff;
   color: #017bfe;
   font-weight: 700;
+  @media (max-width: 640px) {
+    /* width: 540px; */
+    white-space: nowrap;
+    width: max-content;
+    padding: 12px 20px;
+    border-radius: 6px;
+  }
 `;
 
 export const HeadTitle = styled.h1`
@@ -47,9 +61,24 @@ export const SubTitle = styled.p`
 `;
 
 export const Content = styled.div`
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1280px;
+  overflow: hidden;
+  gap: 8px;
+  @media (max-width: 640px) {
+    /* width: 540px; */
+    width: 100%;
+  }
+`;
+
+export const CardWrapp = styled.div`
+  /* width: 400px; */
+  /* background: blue; */
+  overflow: hidden;
+  margin: 20px 0;
+  width: max-content;
 `;
 
 export const LinkToDetail = styled(LinkR)`
