@@ -1,4 +1,4 @@
-const usePropertyTypeStore = (set) => ({
+const propertyTypeZustand = (set) => ({
   propertyType: null,
   isLoadingProperty: false,
   errorProperty: null,
@@ -16,4 +16,4 @@ const usePropertyTypeStore = (set) => ({
   },
 });
 
-export default usePropertyTypeStore;
+export default propertyTypeZustand;
