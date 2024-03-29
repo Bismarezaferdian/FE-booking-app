@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import useHotelStore from "./hotelZustand.js";
 import useSeacrhStore from "./searchZustand.js";
-import propertyTypeZustand from "./propertyTypeZustand.js";
+import propertyTypeZustand from "./jenisProperty.js";
 import { persist } from "zustand/middleware";
 
 export const combineStore = create(
