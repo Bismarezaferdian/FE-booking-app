@@ -35,12 +35,12 @@ import PropertyPart from "../../components/MostHotel/index.js";
 import { combineStore } from "../../zustand/store.js";
 import { GetHotel } from "../../hooks/fetchApi.js";
 import { dateId } from "../../utiltis/dateId.js";
+import MostHotel from "../../components/MostHotel/index.js";
 
 const List = () => {
-  const { hotel, addHotel } = combineStore();
+  const { PropertyType, hotel, addHotel } = combineStore();
   const [search, setSearch] = useState("jakarta");
   const [openDate, setOpenDate] = useState("false");
-  const location = useLocation();
   const { option, dates, addDate } = combineStore();
   // const [option, setOption] = useState(location.state.option);
   const [date, setDate] = useState([
@@ -180,7 +180,8 @@ const List = () => {
         </ListWrapp>
       </ListContainer>
       <PropertiWrapp>
-        <PropertyPart />
+        {/* <PropertyPart /> */}
+        <MostHotel data={PropertyType} />
       </PropertiWrapp>
       <Mail />
     </ListSec>

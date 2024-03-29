@@ -88,7 +88,7 @@ const Hotel = () => {
   return (
     <>
       <Navbar />
-      <ContainerWrapp>
+      <ContainerWrapp id="hotel">
         <Hero img={HeroImg} />
         <ContentContainer>
           <WrappContent>

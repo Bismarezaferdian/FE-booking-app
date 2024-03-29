@@ -2,49 +2,44 @@ import React from "react";
 import Header from "../../components/Header";
 import Mail from "../../components/Mail.js";
 import Navbar from "../../components/Navbar";
-import PropertyPart from "../../components/MostHotel/index.js";
 import HotelDesc from "../../parts/HotelDesc";
 import HotelImage from "../../parts/HotelImage";
 import { useLocation } from "react-router-dom";
 import { HotelContent, TitleDetail } from "./HotelDetailStyle";
-import useFetch from "../../hooks/useFetch";
+import MostHotel from "../../components/MostHotel/index.js";
+import { GetHotelWithId } from "../../hooks/fetchApi.js";
 
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
+  const { hotel, hotelLoading, hotelError } = GetHotelWithId(id);
 
-  const { data, loading } = useFetch(`/api/v1/hotel/find/${id}`);
-
-  // console.log(data);
-
-  // const Image = [
-  //   {
-  //     src: require("../../assets/images/hotel-detail.jpg"),
-  //   },
-  //   {
-  //     src: require("../../assets/images/hotel-detail2.jpg"),
-  //   },
-  //   {
-  //     src: require("../../assets/images/hotel-detail3.jpg"),
-  //   },
-  //   {
-  //     src: require("../../assets/images/hotel-detail4.jpg"),
-  //   },
-  //   {
-  //     src: require("../../assets/images/hotel-detail5.jpg"),
-  //   },
-  // ];
+  if (hotelError) {
+    return (
+      <>
+        <h1>Something went wrong !</h1>
+      </>
+    );
+  }
   return (
     <div>
-      <Navbar />
-      <Header type="list" />
-      <HotelContent>
-        <HotelImage data={data.photo} />
-        <HotelDesc data={data} id={id} />
-        <TitleDetail>Other Hotel</TitleDetail>
-        <PropertyPart />
-        <Mail />
-      </HotelContent>
+      {hotelLoading ? (
+        <div>
+          <h1>is Loading</h1>
+        </div>
+      ) : (
+        <>
+          <Navbar />
+          <Header type="list" />
+          <HotelContent>
+            <HotelImage data={hotel?.photo} />
+            <HotelDesc data={hotel} id={id} />
+            <TitleDetail>Other Hotel</TitleDetail>
+            <MostHotel />
+            <Mail />
+          </HotelContent>
+        </>
+      )}
     </div>
   );
 };

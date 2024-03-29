@@ -23,11 +23,12 @@ import {
   RatingWrapp,
 } from "./PartStyle";
 import { Skeleton } from "@mui/material";
+import { combineStore } from "../../zustand/store";
 
-const MostHotel = (props) => {
+const MostHotel = () => {
+  const { propertyType, isLoadingProperty, errorProperty } = combineStore();
   const [views, setView] = useState(getWindowSize());
 
-  console.log(props);
   function getWindowSize() {
     const { innerWidth } = window;
     return { innerWidth };
@@ -45,12 +46,17 @@ const MostHotel = (props) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   combineStore.persist.rehydrate();
+  // }, []);
+
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     }).format(number);
   };
+
   return (
     <PropertySec>
       <PropertyWrapp>
@@ -65,38 +71,29 @@ const MostHotel = (props) => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {props?.data?.map((item, i) => (
+            {propertyType?.map((item, i) => (
               <SwiperSlide key={i}>
-                {props.loading ? (
-                  <>
-                    <Skeleton variant="rectangular" width={160} height={118} />
-                    <Skeleton width="80%" />
-                    <Skeleton width="30%" />
-                    <Skeleton width="80%" />
-                  </>
-                ) : (
-                  <PartItems>
-                    <div>
-                      <PartImg src={item.photo[0]} />
-                    </div>
-                    <PartTitleWrapp>
-                      <PartTitle to={`/hotels/${item._id}`}>
-                        {" "}
-                        {item.name}
-                      </PartTitle>
-                      <PartCity>{item.city}</PartCity>
-                      <PartPrice>
-                        starting from {rupiah(item.cheapestPrice)}
-                      </PartPrice>
-                      {item.rating && (
-                        <RatingWrapp>
-                          <PartRating>{item.rating}</PartRating>
-                          <Rating>Exellent</Rating>
-                        </RatingWrapp>
-                      )}
-                    </PartTitleWrapp>
-                  </PartItems>
-                )}
+                <PartItems>
+                  <div>
+                    <PartImg src={item.photo[0]} />
+                  </div>
+                  <PartTitleWrapp>
+                    <PartTitle to={`/hotels/${item._id}`}>
+                      {" "}
+                      {item.name}
+                    </PartTitle>
+                    <PartCity>{item.city}</PartCity>
+                    <PartPrice>
+                      starting from {rupiah(item.cheapestPrice)}
+                    </PartPrice>
+                    {item.rating && (
+                      <RatingWrapp>
+                        <PartRating>{item.rating}</PartRating>
+                        <Rating>Exellent</Rating>
+                      </RatingWrapp>
+                    )}
+                  </PartTitleWrapp>
+                </PartItems>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -108,3 +105,12 @@ const MostHotel = (props) => {
 };
 
 export default MostHotel;
+
+// {props.loading ? (
+//   <>
+//     <Skeleton variant="rectangular" width={160} height={118} />
+//     <Skeleton width="80%" />
+//     <Skeleton width="30%" />
+//     <Skeleton width="80%" />
+//   </>
+// ) : (

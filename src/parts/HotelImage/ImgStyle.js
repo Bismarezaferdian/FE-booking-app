@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const HotelImgWrapp = styled.div`
   display: grid;
   justify-content: center;
-  /* padding: 8px 0; */
-  /* margin: 0 20px 0 20px; */
   min-height: 60vh;
   @media screen and (max-width: 768px) {
     min-height: 40vh;

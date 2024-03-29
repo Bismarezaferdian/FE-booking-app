@@ -3,16 +3,7 @@ import addHotel from "../zustand/hotelZustand";
 
 const fecther = (url) => fetch(url).then((res) => res.json());
 
-// export const GetHotel = () => {
-//   const {
-//     data: hotels,
-//     isLoading: hotelLoading,
-//     error: hotelError,
-//   } = useSWR(`${process.env.REACT_APP_HOST}/api/v1/hotel/all`, fecther);
-//   // Handle loading state
-//   return { hotels, hotelLoading, hotelError };
-// };
-
+//di awali dengan huruf besar karna merupakan factory function
 export const GetHotel = (limit) => {
   let apiUrl = `${process.env.REACT_APP_HOST}/api/v1/hotel/all`;
 
@@ -27,6 +18,18 @@ export const GetHotel = (limit) => {
   } = useSWR(apiUrl, fecther);
   // Handle loading state
   return { hotels, hotelLoading, hotelError };
+};
+
+export const GetHotelWithId = (id) => {
+  const apiUrl = `${process.env.REACT_APP_HOST}/api/v1/hotel/find/${id}`;
+
+  const {
+    data: hotel,
+    isLoading: hotelLoading,
+    error: hotelError,
+  } = useSWR(apiUrl, fecther);
+  // Handle loading state
+  return { hotel, hotelLoading, hotelError };
 };
 
 export const GetCity = (limit) => {
@@ -88,4 +91,13 @@ export const GetMostHotel = () => {
     fecther
   );
   return { mostHotel, mostHotelLoading, mostHotelError };
+};
+
+export const GetRoom = (id) => {
+  const {
+    data: room,
+    isLoading: roomLoading,
+    error: roomError,
+  } = useSWR(`${process.env.REACT_APP_HOST}/api/v1/hotel/room/${id}`, fecther);
+  return { room, roomLoading, roomError };
 };

@@ -1,7 +1,7 @@
 // import second from "styles-component";
 
 import styled from "styled-components";
-import { FaDotCircle } from "react-icons/fa";
+import { FaDotCircle, FaBars } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { Link as LinkR } from "react-router-dom";
 
@@ -23,6 +23,14 @@ export const Nav = styled.div`
   top: 0;
   z-index: 999;
   height: 50px;
+  @media screen and (max-width: 768px) {
+    position: relative;
+    z-index: 9999;
+  }
+  @media screen and (max-width: 480px) {
+    position: relative;
+    z-index: 999;
+  }
 `;
 
 export const NavbarContainer = styled.div`
@@ -60,6 +68,30 @@ export const NavItems = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  @media screen and (max-width: 768px) {
+    /* margin: 10px; */
+    display: none;
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+export const NavMobile = styled.div`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    /* margin: 10px; */
+    display: flex;
+  }
+  @media screen and (max-width: 480px) {
+    display: flex;
+  }
+`;
+
+export const SideBarIcon = styled(FaBars)`
+  cursor: pointer;
+  align-items: center;
 `;
 
 export const NavMenu = styled(LinkR)``;

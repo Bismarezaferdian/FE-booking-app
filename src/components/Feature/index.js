@@ -48,7 +48,7 @@ const Feature = () => {
   };
 
   return (
-    <FeatureSec>
+    <FeatureSec id="hotel">
       <FeatureContainer>
         {cityLoading && (
           <>

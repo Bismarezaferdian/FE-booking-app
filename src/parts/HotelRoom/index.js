@@ -36,15 +36,13 @@ import {
   WrapDesc,
 } from "./HotelRoomStyle";
 import { combineStore } from "../../zustand/store";
+import { GetRoom } from "../../hooks/fetchApi";
 
 const HotelRoom = ({ id, hotel }) => {
-  console.log(hotel);
   // console.log(hotel);
   // const [selectedRoom, setSelectedRoom] = useState([]);
-  const { data, loading } = useFetch(`/api/v1/hotel/room/${id}`);
-
-  console.log(data);
-
+  // const { room, loading } = useFetch(`/api/v1/hotel/room/${id}`);
+  const { room, roomLoading, roomError } = GetRoom(id);
   const { dates } = combineStore();
   const { date } = useContext(SearchContext);
   const getDatesInRange = (startDate, endDate) => {
@@ -83,7 +81,7 @@ const HotelRoom = ({ id, hotel }) => {
   // };
 
   const handleClick = async () => {
-    navigate("/steper", { state: { hotel, data } });
+    navigate("/steper", { state: { hotel, room } });
   };
 
   const rupiah = (number) => {
@@ -97,7 +95,7 @@ const HotelRoom = ({ id, hotel }) => {
     <RoomContainer id="reservasi">
       <ToastContainer autoClose={3000} />
       <RoomTitle>Select Rooms</RoomTitle>
-      {loading ? (
+      {roomLoading ? (
         <Skeleton
           sx={{ bgcolor: "grey" }}
           variant="rectangular"
@@ -106,7 +104,7 @@ const HotelRoom = ({ id, hotel }) => {
         />
       ) : (
         <RoomContentWrap>
-          {data.map((room, i) => (
+          {room.map((room, i) => (
             <CardRoom key={i}>
               <ImageRoomWrapp>
                 {room.image?.map((item, i) => (

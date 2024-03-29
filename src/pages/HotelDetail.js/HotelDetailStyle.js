@@ -6,9 +6,6 @@ export const HotelContent = styled.div`
   justify-content: center;
   align-content: center;
   background-color: #edf6f9;
-  padding-top: 30px;
-  /* align-items: center; */
-  /* max-width: 1024px; */
 `;
 
 export const TitleDetail = styled.p`

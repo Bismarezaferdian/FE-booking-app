@@ -1,8 +1,17 @@
 const usePropertyTypeStore = (set) => ({
-  PropertyType: null,
+  propertyType: null,
+  isLoadingProperty: false,
+  errorProperty: null,
+
   getPropertyType: (item) => {
     set(() => ({
-      PropertyType: item,
+      propertyType: item,
+    }));
+  },
+  updateError: (error) => {
+    // console.log(error);
+    set(() => ({
+      errorProperty: error,
     }));
   },
 });

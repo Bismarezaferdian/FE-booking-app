@@ -20,12 +20,15 @@ import {
   NavButtonRegister,
   UserName,
   Icon,
-  NavMenu,
+  SideBarIcon,
+  NavMobile,
 } from "./NavbarStyle";
 import { useState } from "react";
+import Sidebar from "../Sidebar";
 
 const Navbar = () => {
   const { user, dispatch } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const name = user ? user.userName.slice(0, 1) : "";
   const navigate = useNavigate();
@@ -43,8 +46,13 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  const togle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Nav>
+      <Sidebar togle={togle} isOpen={isOpen} />
       <NavbarContainer>
         <Logo to="/">
           traveler <Dot /> com
@@ -127,6 +135,9 @@ const Navbar = () => {
                 Logout
               </MenuItem>
             </Menu>
+            <NavMobile onClick={togle}>
+              <SideBarIcon />
+            </NavMobile>
           </>
         ) : (
           <NavItems>
