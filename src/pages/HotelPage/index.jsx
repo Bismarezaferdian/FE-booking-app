@@ -4,31 +4,17 @@ import Card from "../../element/Card";
 import HeroImg from "../../assets/images/feature-villa3.jpg";
 import {
   ButtonShowAll,
-  CardWrapp,
   Content,
   ContentContainer,
   HeadTitle,
   LinkToDetail,
-  PlaceWrapp,
-  Province,
-  ProvinceContent,
-  ProvinceWrapp,
   SubTitle,
   WrappContent,
-  WrappRekomendasi,
 } from "./Hotel";
-import {
-  GetCity,
-  GetHotel,
-  GetHotelWithQuery,
-  GetProvince,
-} from "../../hooks/fetchApi";
+import { GetCity, GetHotel } from "../../hooks/fetchApi";
 import Hero from "../../components/Hero";
-import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
-import Place from "../../parts/PlaceSlider";
 import { Box, Skeleton } from "@mui/material";
-import PropertyPart from "../../components/MostHotel/index.js";
 import Mail from "../../components/Mail.js";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";

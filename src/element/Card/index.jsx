@@ -5,11 +5,10 @@ import {
   Price,
   SubTitle,
   Title,
-  WrapDesc,
   Wrapp,
   WrappImage,
 } from "./Card";
-import { rupiah, rupiahId } from "../../utiltis/rupiahId";
+import { rupiah } from "../../utiltis/rupiahId";
 import { MdLocationPin } from "react-icons/md";
 
 const Card = (props) => {

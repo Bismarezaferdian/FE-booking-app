@@ -1,3 +1,3 @@
-const useBooking = (set, get) => ({
-  hotel: null,
-});
+// const useBooking = (set, get) => ({
+//   hotel: null,
+// });

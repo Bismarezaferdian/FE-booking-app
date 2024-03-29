@@ -11,7 +11,7 @@ import {
 import { Skeleton } from "@mui/material";
 import { SearchContext } from "../../context/SearchContext";
 import { Navigate } from "react-router-dom";
-import { GetCity, GetCityWithAllHotel } from "../../hooks/fetchApi";
+import { GetCity } from "../../hooks/fetchApi";
 
 const Feature = () => {
   const { dispatch } = useContext(SearchContext);

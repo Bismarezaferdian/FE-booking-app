@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import addHotel from "../zustand/hotelZustand";
 
 const fecther = (url) => fetch(url).then((res) => res.json());
 

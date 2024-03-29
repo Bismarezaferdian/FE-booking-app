@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  HotelImg,
-  HotelImgContainer,
-  HotelImgWrapp,
-  ImgWrapp,
-  WrappContent,
-} from "./ImgStyle";
+import { HotelImg, HotelImgContainer, HotelImgWrapp } from "./ImgStyle";
 
 const HotelImage = ({ data }) => {
   const [images, setImages] = useState([]);

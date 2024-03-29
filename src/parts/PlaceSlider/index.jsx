@@ -1,10 +1,8 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
-import { Pagination, Navigation } from "swiper";
 import { Province, ProvinceContent, ProvinceWrapp, PlaceWrapp } from "./Place";
-import { GetProperties, GetProvince } from "../../hooks/fetchApi";
-import { Box, Skeleton } from "@mui/material";
+import { GetProperties } from "../../hooks/fetchApi";
+import { Skeleton } from "@mui/material";
 //props city from list city of hotel
 const PlaceSlider = ({ city }) => {
   //form list provice

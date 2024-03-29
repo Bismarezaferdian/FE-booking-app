@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import Part from "../../assets/images/property-part.jpg";
-import Part2 from "../../assets/images/property-part2.jpg";
-import Part3 from "../../assets/images/property-part3.jpg";
-import Part4 from "../../assets/images/property-part4.jpg";
-import useFetch from "../../hooks/useFetch";
 import {
   PartCity,
   PartContainer,
@@ -22,7 +17,6 @@ import {
   Rating,
   RatingWrapp,
 } from "./PartStyle";
-import { Skeleton } from "@mui/material";
 import { combineStore } from "../../zustand/store";
 
 const MostHotel = () => {

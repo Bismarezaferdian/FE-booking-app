@@ -1,18 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import Feature from "../../components/Feature";
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Mail from "../../components/Mail.js";
 import Navbar from "../../components/Navbar";
 import PropertyList from "../../components/PropertyList";
-import { AuthContext } from "../../context/AuthContex";
-import { HomeCountainer, HomeTitle } from "./HomeStyle";
-import useFetch from "../../hooks/useFetch.js";
-import { GetHotel, GetProperties, GetMostHotel } from "../../hooks/fetchApi.js";
+import { HomeCountainer } from "./HomeStyle";
+import { GetProperties, GetMostHotel } from "../../hooks/fetchApi.js";
 import MostHotel from "../../components/MostHotel/index.js";
 import { combineStore } from "../../zustand/store.js";
-import Sidebar from "../../components/Sidebar/index.jsx";
 
 const Home = () => {
   // const { hotels, loading, error } = GetHotel();

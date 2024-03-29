@@ -2,20 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format, parse, parseISO } from "date-fns";
 import {
   HeaderHead,
   HeaderContainer,
-  HeaderItem,
-  HeaderList,
   Span,
   HeadTitle,
   HeaderDesc,
   HeaderBtn,
   Bed,
-  Car,
-  Plane,
-  Taxi,
   HeaderSearch,
   HeaderSearchItems,
   Input,
@@ -31,12 +25,11 @@ import {
   OptionCounter,
   Minus,
   Plus,
-  Train,
   HeaderWrappButton,
 } from "./HeaderStyle";
-import { useLocation, useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
-import { toast, ToastContainer } from "react-toastify";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import { SearchContext } from "../../context/SearchContext";
+import { ToastContainer } from "react-toastify";
 import { combineStore } from "../../zustand/store";
 import { dateId } from "../../utiltis/dateId";
 
@@ -53,18 +46,18 @@ function Header({ type }) {
   ]);
 
   // console.log(dateRange);
-  var location = useLocation();
+  // var location = useLocation();
 
-  const getNavLink = (path) => {
-    return location.pathname === path ? "active" : undefined;
-  };
+  // const getNavLink = (path) => {
+  //   return location.pathname === path ? "active" : undefined;
+  // };
 
   // useEffect(() => {
   //   setDateRange(dates);
   // }, [dates]);
 
-  const navigate = useNavigate();
-  const { dispatch } = useContext(SearchContext);
+  // const navigate = useNavigate();
+  // const { dispatch } = useContext(SearchContext);
 
   const handleSubmit = () => {
     // if (destination === "") {

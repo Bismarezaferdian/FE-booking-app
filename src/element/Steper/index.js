@@ -12,7 +12,6 @@ import { HomeCountainer } from "../../pages/Home/HomeStyle";
 import { Buttonwrapp, SteperContent, StepperWrap } from "./SteperStyle";
 // import { useLocation } from "react-router-dom";
 import { useContext } from "react";
-import { SearchContext } from "../../context/SearchContext";
 import { BookingContext } from "../../context/BookingContex";
 import { dateId } from "../../utiltis/dateId";
 import axios from "axios";

@@ -1,9 +1,6 @@
-import React, { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import { Bed } from "../../components/Header/HeaderStyle";
 import { Smoke, Tv, Wifi } from "../../components/HotelList.js/HotelListStyle";
-import { SearchContext } from "../../context/SearchContext";
-import useFetch from "../../hooks/useFetch";
 import HotelRoom from "../HotelRoom";
 import {
   Bath,

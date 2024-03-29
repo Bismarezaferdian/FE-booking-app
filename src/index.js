@@ -12,7 +12,6 @@ import { SearchContextProvider } from "./context/SearchContext";
 import { AuthContextProvider } from "./context/AuthContex";
 import { BookingContextProvider } from "./context/BookingContex";
 import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

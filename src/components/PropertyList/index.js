@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import Hotel1 from "../../assets/images/property-hotel.jpg";
-import Hotel2 from "../../assets/images/property-hotel2.jpg";
-import Villa from "../../assets/images/property-villa.jpg";
-import Villa2 from "../../assets/images/property-villa2.jpg";
-import Villa3 from "../../assets/images/property-villa3.jpg";
-import useFetch from "../../hooks/useFetch";
 import {
   PropertyContainer,
   PropertyImg,
@@ -17,7 +11,6 @@ import {
   PropertyTitle,
   PropertyTitleWrapp,
   PropertyHeadTitle,
-  WrappSkeleton,
 } from "./PropertyStyle";
 import { Skeleton } from "@mui/material";
 

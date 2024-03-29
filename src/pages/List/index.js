@@ -1,8 +1,6 @@
-import React, { Children, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
-import { format } from "date-fns";
 import {
   BtnListSeacrh,
   BtnWrapp,
@@ -28,10 +26,8 @@ import {
 import { Date } from "../../components/Header/HeaderStyle";
 import { DateRange } from "react-date-range";
 import HotelList from "../../components/HotelList.js/index";
-import Footer from "../../components/Footer";
 import Mail from "../../components/Mail.js";
 import { Skeleton } from "@mui/material";
-import PropertyPart from "../../components/MostHotel/index.js";
 import { combineStore } from "../../zustand/store.js";
 import { GetHotel } from "../../hooks/fetchApi.js";
 import { dateId } from "../../utiltis/dateId.js";

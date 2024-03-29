@@ -1,8 +1,7 @@
 import { Skeleton } from "@mui/material";
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { Bed } from "../../components/Header/HeaderStyle";
 import {
   HotelDescCancel,
@@ -11,31 +10,23 @@ import {
   Tv,
   Wifi,
 } from "../../components/HotelList.js/HotelListStyle";
-import { SearchContext } from "../../context/SearchContext";
-import useFetch from "../../hooks/useFetch";
-import { Bath, IconWrapp } from "../HotelDesc/HotelDescStyle";
+import { Bath } from "../HotelDesc/HotelDescStyle";
 import {
   ButtonRoom,
   CardRoom,
-  Content,
   ContentRoomWrap,
   IconRoom,
   IconRoomWrapp,
   ImageDetail,
   ImageRoomWrapp,
-  InputNumb,
-  Label,
   PriceDescWrapp,
   RoomContainer,
   RoomContentWrap,
-  RoomDesc,
-  RoomFasilitas,
   RoomH1,
   RoomTitle,
   SubContent,
   WrapDesc,
 } from "./HotelRoomStyle";
-import { combineStore } from "../../zustand/store";
 import { GetRoom } from "../../hooks/fetchApi";
 
 const HotelRoom = ({ id, hotel }) => {
@@ -43,23 +34,22 @@ const HotelRoom = ({ id, hotel }) => {
   // const [selectedRoom, setSelectedRoom] = useState([]);
   // const { room, loading } = useFetch(`/api/v1/hotel/room/${id}`);
   const { room, roomLoading, roomError } = GetRoom(id);
-  const { dates } = combineStore();
-  const { date } = useContext(SearchContext);
-  const getDatesInRange = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+  // const { dates } = combineStore();
+  // const getDatesInRange = (startDate, endDate) => {
+  //   const start = new Date(startDate);
+  //   const end = new Date(endDate);
 
-    const dates = [];
+  //   const dates = [];
 
-    while (start <= end) {
-      dates.push(new Date(start).getTime());
-      start.setDate(start.getDate() + 1);
-    }
+  //   while (start <= end) {
+  //     dates.push(new Date(start).getTime());
+  //     start.setDate(start.getDate() + 1);
+  //   }
 
-    return dates;
-  };
+  //   return dates;
+  // };
 
-  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+  // const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   // const isAvailable = (roomNumber) => {
   //   const isFound = roomNumber.unavailableDates.some((date) =>
