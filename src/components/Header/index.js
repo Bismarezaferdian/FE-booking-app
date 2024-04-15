@@ -32,6 +32,7 @@ import {
 import { ToastContainer } from "react-toastify";
 import { combineStore } from "../../zustand/store";
 import { dateId } from "../../utiltis/dateId";
+import { useNavigate } from "react-router-dom";
 
 function Header({ type }) {
   const { addCity, dates, addDate, updateOption, option } = combineStore();
@@ -56,7 +57,7 @@ function Header({ type }) {
   //   setDateRange(dates);
   // }, [dates]);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const { dispatch } = useContext(SearchContext);
 
   const handleSubmit = () => {
@@ -67,12 +68,12 @@ function Header({ type }) {
     //     type: "NEW_SEARCH",
     //     payload: { destination, date, option },
     //   });
-    //   navigate("/hotels", { state: { destination, date, option } });
+    navigate("/hotels", { state: { name: "bisma" } });
     // }
   };
 
   const handleDestination = (e) => {
-    addCity(capitalizeFirstLetter(e.target.value));
+    addCity(e.target.value);
   };
 
   //update to store Zustand
@@ -81,9 +82,9 @@ function Header({ type }) {
     addDate([e.selection]);
   };
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // const capitalizeFirstLetter = (string) => {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // };
 
   useEffect(() => {
     combineStore.persist.rehydrate();

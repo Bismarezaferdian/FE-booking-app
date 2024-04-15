@@ -140,12 +140,17 @@ const Navbar = () => {
             </NavMobile>
           </>
         ) : (
-          <NavItems>
-            <NavButton to="/hotel">Hotel</NavButton>
-            <NavButton to="#">Reservation</NavButton>
-            <NavButton to="/login">Login</NavButton>
-            <NavButtonRegister>Register</NavButtonRegister>
-          </NavItems>
+          <>
+            <NavItems>
+              <NavButton to="/hotel">Hotel</NavButton>
+              <NavButton to="#">Reservation</NavButton>
+              <NavButton to="/login">Login</NavButton>
+              <NavButtonRegister>Register</NavButtonRegister>
+            </NavItems>
+            <NavMobile onClick={togle}>
+              <SideBarIcon />
+            </NavMobile>
+          </>
         )}
       </NavbarContainer>
     </Nav>

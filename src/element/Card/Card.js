@@ -14,7 +14,6 @@ export const WrappImage = styled.div`
   display: flex;
   overflow: hidden;
   position: relative;
-  background-color: red;
 `;
 
 export const Image = styled.img`

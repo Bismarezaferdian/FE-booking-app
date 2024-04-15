@@ -32,10 +32,11 @@ import { combineStore } from "../../zustand/store.js";
 import { GetHotel } from "../../hooks/fetchApi.js";
 import { dateId } from "../../utiltis/dateId.js";
 import MostHotel from "../../components/MostHotel/index.js";
+import { useLocation } from "react-router-dom";
 
 const List = () => {
-  const { PropertyType, hotel, addHotel } = combineStore();
-  const [search, setSearch] = useState("jakarta");
+  const { PropertyType, hotel, addHotel, city, addCity } = combineStore();
+  const [search, setSearch] = useState(city);
   const [openDate, setOpenDate] = useState("false");
   const { option, dates, addDate } = combineStore();
   // const [option, setOption] = useState(location.state.option);
@@ -47,8 +48,10 @@ const List = () => {
     },
   ]);
 
-  const { hotels, hotelLoading, hotelError } = GetHotel();
+  const location = useLocation();
+  console.log(location.state);
 
+  const { hotels, hotelLoading, hotelError } = GetHotel();
   console.log(hotels);
   useEffect(() => {
     if (hotels) {
@@ -58,12 +61,15 @@ const List = () => {
 
   useEffect(() => {
     if (search) {
+      addCity(search);
       const filter = hotels
         ?.map((hotel) => hotel)
         .filter((item) => item?.place?.city === search);
       addHotel(filter);
+    } else if (search === "") {
+      addHotel(hotels);
     }
-  }, [search, hotels, addHotel]);
+  }, [search, hotels, addHotel, addCity]);
 
   console.log(hotel);
 
@@ -166,8 +172,8 @@ const List = () => {
               </WrappSkeleton>
             ) : (
               <div>
-                {hotels &&
-                  hotels?.map((item) => (
+                {hotel &&
+                  hotel?.map((item) => (
                     <HotelList item={item} key={item._id} />
                   ))}
               </div>
@@ -176,7 +182,6 @@ const List = () => {
         </ListWrapp>
       </ListContainer>
       <PropertiWrapp>
-        {/* <PropertyPart /> */}
         <MostHotel data={PropertyType} />
       </PropertiWrapp>
       <Mail />

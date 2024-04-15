@@ -8,7 +8,16 @@ export const PropertyHeadTitle = styled.h1`
   font-size: 18px;
   line-height: 30px;
   font-weight: 700;
-  padding-bottom: 12px;
+  padding: 0 12px 0 12px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 14px;
+    font-weight: 600;
+  }
 `;
 
 export const PropertyContainer = styled.div`

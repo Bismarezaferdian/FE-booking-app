@@ -71,12 +71,10 @@ export const HotelImg = styled.img`
   @media screen and (max-width: 768px) {
     height: 180px;
     width: 120px;
-    background-color: green;
   }
   @media screen and (max-width: 480px) {
     min-height: 100px;
     width: 120px;
-    background-color: red;
   }
 `;
 

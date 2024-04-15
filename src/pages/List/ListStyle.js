@@ -91,7 +91,7 @@ export const ListInput = styled.input.attrs({
   padding: 10px 10px 10px 30px;
   border: none;
   border-radius: 4px;
-  text-transform: capitalize;
+  text-transform: lowercase;
 `;
 
 export const ListResult = styled.div`
